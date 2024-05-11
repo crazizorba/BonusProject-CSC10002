@@ -1,9 +1,11 @@
-#include<iostream>
+﻿#include"Graphics.h"
 
-using namespace std;
+
 
 int main() {
-	cout << "Hi, Thi!";
-	cout << "Finish";
+	//system("color A0");
+	menu(50,10);
+	//cout << "Noo";
+
 	return 0;
 }

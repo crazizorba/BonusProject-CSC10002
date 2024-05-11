@@ -1,2 +1,4 @@
-﻿  main.cpp
+﻿  Graphics.cpp
+C:\TONGHOPTRENLOP\HK2_FirstYear\KTLT\BonusProject\BonusProject\BonusProject\Graphics.cpp(28,28): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+C:\TONGHOPTRENLOP\HK2_FirstYear\KTLT\BonusProject\BonusProject\BonusProject\Graphics.cpp(28,34): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
   BonusProject.vcxproj -> C:\TONGHOPTRENLOP\HK2_FirstYear\KTLT\BonusProject\BonusProject\x64\Debug\BonusProject.exe
