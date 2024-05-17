@@ -73,11 +73,12 @@ void Menu(str thaotac[5], int n) {
 }
 
 
-
-
 int main() {
-	system("color 70");
-	Menu(thaotac, 5);
+	//system("color 70");
+	//Menu(thaotac, 5);
+	cout << "123450" << endl;
+
+
 	system("pause");
 	return 0;
 
