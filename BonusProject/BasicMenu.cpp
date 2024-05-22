@@ -25,7 +25,8 @@ TRANGTHAI key(int z) {
 	else if (z == 13) return ENTER;
 }
 
-void Menu(str thaotac[5], int n) {
+void Menu(int n) {
+	str thaotac[5] = { "Thao Tac 1","Thao Tac 2", "Thao Tac 3", "Thao Tac 4","Thao Tac 5" };
 	int tt = 0;
 	int* mau = new int[n];
 	for (int i = 0;i < n;i++) {
@@ -61,7 +62,7 @@ void Menu(str thaotac[5], int n) {
 			break;
 
 		}
-		case ENTER: Menu(thaotac, 5);
+		case ENTER: Menu(5);
 		}
 		for (int i = 0;i < n;i++) {
 			mau[i] = MAUCHU;

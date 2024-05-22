@@ -1,1 +1,9 @@
-﻿  BonusProject.vcxproj -> C:\TONGHOPTRENLOP\HK2_FirstYear\KTLT\BonusProject\BonusProject\x64\Debug\BonusProject.exe
+﻿  BasicMenu.cpp
+  GraphicBasic.cpp
+C:\TONGHOPTRENLOP\HK2_FirstYear\KTLT\BonusProject\BonusProject\BonusProject\GraphicBasic.cpp(34,28): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+C:\TONGHOPTRENLOP\HK2_FirstYear\KTLT\BonusProject\BonusProject\BonusProject\GraphicBasic.cpp(34,34): warning C4838: conversion from 'int' to 'SHORT' requires a narrowing conversion
+  main.cpp
+  Struct.cpp
+  Generating Code...
+C:\TONGHOPTRENLOP\HK2_FirstYear\KTLT\BonusProject\BonusProject\BonusProject\BasicMenu.cpp(26): warning C4715: 'key': not all control paths return a value
+  BonusProject.vcxproj -> C:\TONGHOPTRENLOP\HK2_FirstYear\KTLT\BonusProject\BonusProject\x64\Debug\BonusProject.exe

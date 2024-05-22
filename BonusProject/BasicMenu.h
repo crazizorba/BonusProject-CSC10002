@@ -18,6 +18,6 @@ typedef char str[31];
 
 TRANGTHAI key(int z);
 
-void Menu(str thaotac[5], int n);
+void Menu(int n);
 
 #endif
