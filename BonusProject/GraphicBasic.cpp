@@ -138,3 +138,9 @@ void drawBox(int x, int y, int w, int h, int t_color) {
 		cout << char(217);
 	
 	}
+
+int central(int w, string a) {
+	int i = w / 2;
+	int x = a.length() / 2;
+	return i - x;
+}

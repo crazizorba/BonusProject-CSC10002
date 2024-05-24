@@ -46,6 +46,9 @@ void writeText(int x, int y, string content, int color);
 //10. Ke bang
 void drawBox(int x, int y, int w, int h, int t_color);
 
+//11. Canh giua
+int central(int w, string a);
+
 
 
 #endif
