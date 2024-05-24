@@ -5,7 +5,8 @@
 
 int main() {
 
-	Menu(5);
+	string sentences[3] = { "what are you","Staff","Student" };
+	menu(44, 9, 40, 10, 6, 11, sentences, 3);
 	system("pause");
 	return 0;
 
