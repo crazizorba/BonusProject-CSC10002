@@ -1,8 +1,24 @@
 #include"BasicMenu.h"
 
-#define MAUNEN 1
-#define MAUCHU 12
+#define MAUNEN 11
+#define MAUCHU 7
 
+//KICH THUOC MAN HINH CONSOLE
+#define WConsole 120
+#define HConsole 30
+
+//KICH THUOC HOP MAC DINH
+#define Xbox 40
+#define Ybox 5
+#define Wbox 40
+#define Hbox 20
+
+//LE TEXT TRONG HOP
+#define Upbox 7
+#define DownBox 23
+#define LeftBox 55
+#define RightBox 65
+#define Line 3
 
 
 TRANGTHAI key(int z) {
@@ -77,26 +93,27 @@ void drawBox(int x, int y, int w, int h, int t_color, int b_color) {
 	textColor(t_color);
 	for (int i = x; i <= x + w; i++) {
 		gotoxy(i, y);
-		cout << char(150);
+		cout << char(196);
 		gotoxy(i, y + h);
-		cout << char(150);
+		cout << char(196);
 	}
 	for (int i = y; i <= y + h; i++) {
 		gotoxy(x, i);
-		cout << char(166);
+		cout << char(179);
 		gotoxy(x + w, i);
-		cout << char(166);
+		cout << char(179);
 	}
 	gotoxy(x, y);
-	cout << char(187);
+	cout << char(218);
 	gotoxy(x + w, y);
-	cout << char(171);
+	cout << char(191);
 	gotoxy(x, y + h);
-	cout << char(187);
+	cout << char(192);
 	gotoxy(x + w, y + h);
-	cout << char(171);
+	cout << char(217);
 
 	textColor(7);
+	//*****************b_color xai o dau
 }
 
 void thanh_sang(int x, int y, int w, int h, int b_color, string a) {
@@ -141,7 +158,7 @@ int central(int w, string a) {
 
 void menu(int x, int y, int w, int h, int t_color, int b_color, string sentences[], int n) {
 
-	drawBox(x, y, w, h, t_color, b_color);
+	drawBox(x, y, w, h, t_color,b_color);
 	cout << endl;
 	int z = 0;
 	z = central(w, sentences[0]);
@@ -208,4 +225,69 @@ void menu(int x, int y, int w, int h, int t_color, int b_color, string sentences
 			}
 		}
 	}
+}
+
+void MainMenu() {
+	int n = 5;
+	str thaotac[5] = { "Log in","Sign up", "About us","Help", "Exit"};
+	int tt = 0;
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+	int* mau = new int[n];
+	writeText(central(WConsole, "PORTAL HCMUS"), Upbox, "PORTAL HCMUS", MAUCHU);
+	for (int i = 0;i < n;i++) {
+		mau[i] = MAUCHU;
+	}
+	mau[0] = MAUNEN;
+	while (1) {
+		ShowCur(false);
+		deleteScreen();
+
+		textColor(MAUNEN);
+		int tmp = tt;
+		gotoxy(LeftBox - 2, Upbox + Line + tt);
+		cout << char(175);
+		gotoxy(RightBox+ 2, Upbox + Line + tt);
+		cout << char(174);
+
+		for (int i = 0;i < n;i++) {
+			writeText(LeftBox, Upbox+Line+i, thaotac[i], mau[i]);
+		}
+		int z = _getch();
+		TRANGTHAI trangthai = key(z);
+		switch (trangthai) {
+		case UP:
+		{
+			if (tt == 0) tt = n - 1;
+			else {
+				tt--;
+			}
+			break;
+
+		}
+		case DOWN:
+		{
+			if (tt == n - 1) tt = 0;
+			else {
+				tt++;
+			}
+			break;
+
+		}
+		case ENTER: Menu(5);
+		}
+		for (int i = 0;i < n;i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[tt] = MAUNEN;
+		
+		textColor(MAUNEN);
+		gotoxy(LeftBox - 2, Upbox + Line + tmp);
+		cout << " ";
+		gotoxy(RightBox+2, Upbox + Line + tmp);
+		cout << " ";
+
+	}
+	gotoxy(LeftBox - 2, Upbox + Line );
+	textColor(MAUNEN);
+	cout << char(41) << char(41);
 }

@@ -33,4 +33,6 @@ void menu(int x, int y, int w, int h, int t_color, int b_color, string sentences
 int central(int w, string a);
 
 
+void MainMenu();
+
 #endif
