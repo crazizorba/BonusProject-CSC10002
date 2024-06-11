@@ -1,6 +1,7 @@
 #ifndef BasicMenu_h
 #define BasicMenu_h
 
+
 #include"GraphicBasic.h"
 #include<iostream>
 #include<Windows.h>

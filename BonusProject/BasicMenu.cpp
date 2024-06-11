@@ -93,7 +93,7 @@ void MainMenu() {
 		case ENTER: 
 		{
 			clrscr();
-			
+			MainMenu();
 		}
 		}
 		for (int i = 0;i < n;i++) {

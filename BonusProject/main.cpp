@@ -1,11 +1,11 @@
 ﻿#include"GraphicBasic.h"
 #include"BasicMenu.h"
+#include"Struct.h"
 
 
 int main() {
 
-	MainMenu();
-
+	split();
 	system("pause");
 	return 0;
 
