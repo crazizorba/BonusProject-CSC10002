@@ -4,8 +4,7 @@
 
 
 int main() {
-	srand((4));
-	split();
+	
 	system("pause");
 	return 0;
 

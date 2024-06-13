@@ -126,12 +126,12 @@ void split() {
 
 	int i = 50;
 	for (pair<string, string>x : p) {
-		cout << "20200";
+		cout << "23200";
 		i++;
 		if (i < 10) cout << "0" << i;
 		else cout << i;
 		cout << ",";
-		cout << x.first <<","<<x.second<< ","<<rand()%2<<","<<rand() % 31 + 1 << "/" << rand() % 12 + 1 << "/2002,";
+		cout << x.first <<","<<x.second<< ","<<rand()%2<<","<<rand() % 31 + 1 << "/" << rand() % 12 + 1 << "/2005,";
 		cout << rand() % 89999 + 10000<< rand() % 89999 + 10000 <<rand()%89+10<<endl;
 
 	}
