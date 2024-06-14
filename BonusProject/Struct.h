@@ -5,6 +5,7 @@
 #include<string>
 #include<fstream>
 #include<vector>
+#include<sstream>
 
 
 using namespace std;
@@ -111,8 +112,10 @@ Student* CreateStudent(InforPerSon p);
 
 Class* CreateClass(string NameClass);
 
-void split();
+void split();//-----------Tao csv------
 
+void ReadCSVStudent();
 
+Student* getNodeTailClass(Student* pHead);
 
 #endif

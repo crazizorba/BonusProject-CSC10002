@@ -137,3 +137,59 @@ void split() {
 	}
 	
 }
+
+void ReadCSVStudent() {
+	ifstream fin;
+	fin.open("23APCS2.csv");
+	Class c;
+	c.pNext = NULL;
+	c.pHead = NULL;
+	string tmp;
+	
+	getline(fin, tmp, '\n');
+	cout << tmp<<endl;
+	
+
+	while (!fin.eof()) {
+		Student* p = new Student;
+		p->pNextClass = NULL;
+		p->pNextCourse = NULL;
+		getline(fin, p->Info.ID, ',');
+		getline(fin, p->Info.LastName, ',');
+		getline(fin, p->Info.FirstName, ',');
+		string tmpG;
+		getline(fin, tmpG, ',');
+		if (tmpG.compare("0") == 0) p->Info.Gender = 0;
+		else p->Info.Gender = 1;
+		getline(fin, p->Info.DateOfBirth, ',');
+		getline(fin, p->Info.SocialID, '\n');
+	
+	
+		if (c.pHead == NULL) c.pHead = p;
+		else {
+			Student* tail = getNodeTailClass(c.pHead);
+			tail->pNextClass = p;
+		}
+		
+	}
+	Student* q = c.pHead;
+	int i = 1;
+	while (q != NULL) {
+		cout << i << ". ";
+		cout <<q->Info.ID<<" "<< q->Info.LastName << " " << q->Info.FirstName << " " << q->Info.Gender << endl;
+		i++;
+		q = q->pNextClass;
+	}
+	
+	fin.close();
+}
+
+Student* getNodeTailClass(Student* pHead) {
+	Student* p = pHead;
+	if (p == NULL) return p;
+	else {
+		while (p->pNextClass != NULL) p = p->pNextClass;
+		return p;
+	}
+
+}
