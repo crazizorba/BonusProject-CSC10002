@@ -243,7 +243,9 @@ void Build(School &s) {
 		tmp = tmp->pNext;
 	}
 
-	
+	cout << s.name;
+	SchoolYear* p = s.pHead->pSchoolHead;
+	//while()
 }
 
 void BuildStaffByReadCSV(School& s, const char* p) {
@@ -320,11 +322,9 @@ void BuildAllClass(Staff* &p) {
 }
 
 void BuildSchoolYear(Staff*& p) {
-	SchoolYear* p1 = CreateSchoolYear("2020-2021");
 	SchoolYear* p2 = CreateSchoolYear("2021-2022");
 	SchoolYear* p3 = CreateSchoolYear("2022-2023");
 	SchoolYear* p4 = CreateSchoolYear("2023-2024");
-	AddSchoolYear(p, p1);
 	AddSchoolYear(p, p2);
 	AddSchoolYear(p, p3);
 	AddSchoolYear(p, p4);
