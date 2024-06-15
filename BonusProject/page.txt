@@ -1,10 +1,28 @@
-  _______ ______ _______ ________ ______ __
-|     \/   \|     \|    \/  \| \
-| â–“â–“â–“â–“â–“â–“â–“\ â–“â–“â–“â–“â–“â–“\ â–“â–“â–“â–“â–“â–“â–“\\â–“â–“â–“â–“â–“â–“â–“â–“ â–“â–“â–“â–“â–“â–“\ â–“â–“
-| â–“â–“__/ â–“â–“ â–“â–“ | â–“â–“ â–“â–“__| â–“â–“ | â–“â–“ | â–“â–“__| â–“â–“ â–“â–“
-| â–“â–“ â–“â–“ â–“â–“ | â–“â–“ â–“â–“ â–“â–“ | â–“â–“ | â–“â–“ â–“â–“ â–“â–“
-| â–“â–“â–“â–“â–“â–“â–“| â–“â–“ | â–“â–“ â–“â–“â–“â–“â–“â–“â–“\ | â–“â–“ | â–“â–“â–“â–“â–“â–“â–“â–“ â–“â–“
-| â–“â–“ | â–“â–“__/ â–“â–“ â–“â–“ | â–“â–“ | â–“â–“ | â–“â–“ | â–“â–“ â–“â–“_____
-| â–“â–“    \â–“â–“ â–“â–“ â–“â–“ | â–“â–“ | â–“â–“ | â–“â–“ | â–“â–“ â–“â–“ \
-  \â–“â–“     \â–“â–“â–“â–“â–“â–“ \â–“â–“ \â–“â–“ \â–“â–“ \â–“â–“ \â–“â–“\â–“â–“â–“â–“â–“â–“â–“â–“
-
+HKI:
+-----Nam Nhat-----
+Nhap mon CNTT
+Nhap mon Lap trinh
+Toan roi rac
+Vi tich phan 1B
+-----Nam Hai-----
+Co so du lieu
+Cau truc du lieu & Giai thuat
+Xac suat thong ke
+-----Nam Ba-----
+Nhap mon cong nghe phan mem
+He dieu hanh
+Ly thuat so
+
+HKII
+-----Nam Nhat-----
+Ky thuat Lap trinh
+Dai so tuyen tinh
+Vi tich phan 2B
+-----Nam Hai-----
+Phuong phap lap trinh huong doi tuong
+Toan ung dung va thong ke
+Mang may tinh
+-----Nam Ba-----
+He thong may tinh
+Co so tri tue nhan tao
+Phuong phap tinh

@@ -14,7 +14,7 @@
 #define Hbox 20
 
 //LE TEXT TRONG HOP
-#define Upbox 7
+#define Upbox 10
 #define DownBox 23
 #define LeftBox 55
 #define RightBox 65
@@ -45,8 +45,8 @@ TRANGTHAI key(int z) {
 
 void MainMenu() {
 
-	int n = 6;
-	str thaotac[6] = { "Log in","Sign up", "About us","Help","Exit","More"};
+	int n = 4;
+	str thaotac[4] = { "Log in", "About us","Help","Exit"};
 	int tt = 0;
 	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
 	int* mau = new int[n];

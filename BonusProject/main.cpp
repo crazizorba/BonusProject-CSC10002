@@ -4,7 +4,10 @@
 
 
 int main() {
-	ReadCSVStudent();
+	//School s;
+	//Build(s);
+	MainMenu();
+	
 	system("pause");
 	return 0;
 

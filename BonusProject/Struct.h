@@ -37,6 +37,9 @@ struct Course {
 	string CourseName;
 	string ClassName;
 	string TeacherName;
+	int Credit;
+	int Size;
+	string DayOfWeek;
 	string Session;
 	Student* pHead;
 	Course* pNext;
@@ -68,35 +71,30 @@ struct School {
 	string name;
 };
 
+
+void StaticMain();
+
 //INIT
 
 School InitSchool();
 
-void InitStaff(School p);
 
-void InitSchoolYear(Staff *p);
-
-void InitSemester(SchoolYear* p);
-
-void InitCourse(Semester* p);
-
-void InitStudent(Course* p);
-
-void InitClass(Staff* p);
 
 //ADD
 
-void AddStaff(School p);
+void AddStaff(School &p, Staff* q);
 
-void AddSchoolYear(Staff *p);
+void AddSchoolYear(Staff*& p, SchoolYear* q);
 
-void AddSemester(SchoolYear* p);
+void AddSemester(SchoolYear*& p, Semester* q);
 
-void AddCourse(Semester* p);
+void AddCourse(Semester*& p, Course* q);
 
-void AddStudent(Course* p);
+void AddStudentInCourse(Course*& p, Student* q);
 
-void AddClass(Staff* p);
+void AddStudentInClass(Class*& p, Student* q);
+
+void AddClass(Staff*& p, Class* q);
 
 //CREATE
 
@@ -106,7 +104,7 @@ SchoolYear* CreateSchoolYear(string y);
 
 Semester* CreateSemester(int season, string start, string end);
 
-Course* CreateCourse(string CourseID, string CourseName, string ClassName, string TeacherName, string Session);
+Course* CreateCourse(string CourseID, string CourseName, string ClassName, string TeacherName, int credit,int size, string dayOfWeek, string Session);
 
 Student* CreateStudent(InforPerSon p);
 
@@ -114,8 +112,47 @@ Class* CreateClass(string NameClass);
 
 void split();//-----------Tao csv------
 
-void ReadCSVStudent();
+Class* ReadCSVStudent(const char *p, string name);
+
+string ExtractPassWord(string SocailID);
 
 Student* getNodeTailClass(Student* pHead);
+
+Student* getNodeTailCourse(Student* pHead);
+
+void Build(School &s);
+
+void BuildStaffByReadCSV(School& s, const char* p);
+
+void BuildAllClass(Staff* &p);
+
+void BuildSchoolYear(Staff*& p);
+
+void BuildSemester2122(SchoolYear*& p);
+
+void BuildSemester2223(SchoolYear*& p);
+
+void BuildSemester2324(SchoolYear*& p);
+
+void BuildCourseForSemester1_2324(Semester* p);
+
+void BuildCourseForSemester2_2324(Semester* p);
+
+void BuildCourseForSemester3_2324(Semester* p);
+
+void BuildCourseForSemester1_2223(Semester* p);
+
+void BuildCourseForSemester2_2223(Semester* p);
+
+void BuildCourseForSemester3_2223(Semester* p);
+
+void BuildCourseForSemester1_2122(Semester* p);
+
+void BuildCourseForSemester2_2122(Semester* p);
+
+void BuildCourseForSemester3_2122(Semester* p);
+
+void ReadCSVStudentForCourse(const char* p, Course*&c);
+
 
 #endif
