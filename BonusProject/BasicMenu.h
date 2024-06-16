@@ -21,5 +21,17 @@ TRANGTHAI key(int z);
 
 
 void MainMenu();
+void push_enter_main_menu(int y);
+
+void push_enter_menu_login_2(int y);
+
+void LoginMenu();
+void StudentMenu();
+void push_enter_student_menu(int y);
+void StaffMenu();
+void push_enter_staff_menu(int y);
+void AboutusMenu();
+void HelpMenu();
+
 
 #endif
