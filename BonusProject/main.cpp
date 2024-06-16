@@ -4,10 +4,10 @@
 
 
 int main() {
-	School s;
-	Build(s);
+	//School s;
+	//Build(s);
 	
-
+	MainMenu();
 	
 
 	
