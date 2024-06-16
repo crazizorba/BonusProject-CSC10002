@@ -152,7 +152,16 @@ void BuildCourseForSemester2_2122(Semester* p);
 
 void BuildCourseForSemester3_2122(Semester* p);
 
-void ReadCSVStudentForCourse(const char* p, Course*&c);
+void ReadCSVStudentForCourse( char* p, Course*&c);
 
+char* ConvertStringToCharPath(string a);
+
+void BuildCourse(Staff* p);
+
+void AscendingCourse(Course*&pHead);
+
+void AscendingStudentInCourse(Student*&pHead);
+
+void AscendingStudentInClass(Student*& pHead);
 
 #endif

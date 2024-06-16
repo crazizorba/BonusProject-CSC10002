@@ -4,9 +4,12 @@
 
 
 int main() {
-	//School s;
-	//Build(s);
-	MainMenu();
+	School s;
+	Build(s);
+	
+
+	
+
 	
 	system("pause");
 	return 0;

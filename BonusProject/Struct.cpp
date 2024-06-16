@@ -72,6 +72,24 @@ void AddStudentInClass(Class* &p,Student *q) {
 	}
 }
 
+Student* getNodeTailClass(Student* pHead) {
+	Student* p = pHead;
+	if (p == NULL) return p;
+	else {
+		while (p->pNextClass != NULL) p = p->pNextClass;
+		return p;
+	}
+
+}
+
+Student* getNodeTailCourse(Student* pHead) {
+	Student* p = pHead;
+	if (p == NULL) return p;
+	else {
+		while (p->pNextCourse != NULL) p = p->pNextCourse;
+		return p;
+	}
+}
 
 void AddClass(Staff* &p, Class* q) {
 	if (p->pClassHead == NULL) p->pClassHead = q;
@@ -209,32 +227,43 @@ string ExtractPassWord(string SocailID) {
 	return pass;
 }
 
-Student* getNodeTailClass(Student* pHead) {
-	Student* p = pHead;
-	if (p == NULL) return p;
-	else {
-		while (p->pNextClass != NULL) p = p->pNextClass;
-		return p;
-	}
-
-}
-
-Student* getNodeTailCourse(Student* pHead) {
-	Student* p = pHead;
-	if (p == NULL) return p;
-	else {
-		while (p->pNextCourse != NULL) p = p->pNextCourse;
-		return p;
-	}
-}
+//-------------------IMPORTANT-------------------
+//-----------------------------------------------
 
 void Build(School &s) {
 	s = InitSchool();
+	
 	BuildStaffByReadCSV(s, "Staff.csv");
+	
 	BuildAllClass(s.pHead);
+	
 	BuildSchoolYear(s.pHead);
-
-
+	
+	BuildSemester2122(s.pHead->pSchoolHead);
+	BuildSemester2223(s.pHead->pSchoolHead->pNext);
+	BuildSemester2324(s.pHead->pSchoolHead->pNext->pNext);
+	
+	BuildCourseForSemester1_2122(s.pHead->pSchoolHead->pHead);
+	BuildCourseForSemester2_2122(s.pHead->pSchoolHead->pHead->pNext);
+	BuildCourseForSemester3_2122(s.pHead->pSchoolHead->pHead->pNext->pNext);
+	BuildCourseForSemester1_2223(s.pHead->pSchoolHead->pNext->pHead);
+	BuildCourseForSemester2_2223(s.pHead->pSchoolHead->pNext->pHead->pNext);
+	BuildCourseForSemester3_2223(s.pHead->pSchoolHead->pNext->pHead->pNext->pNext);
+	BuildCourseForSemester1_2324(s.pHead->pSchoolHead->pNext->pNext->pHead);
+	BuildCourseForSemester2_2324(s.pHead->pSchoolHead->pNext->pNext->pHead->pNext);
+	BuildCourseForSemester3_2324(s.pHead->pSchoolHead->pNext->pNext->pHead->pNext->pNext);
+	
+	AscendingCourse(s.pHead->pSchoolHead->pHead->pHead);
+	AscendingCourse(s.pHead->pSchoolHead->pHead->pNext->pHead);
+	AscendingCourse(s.pHead->pSchoolHead->pHead->pNext->pNext->pHead);
+	AscendingCourse(s.pHead->pSchoolHead->pNext->pHead->pHead);
+	AscendingCourse(s.pHead->pSchoolHead->pNext->pHead->pNext->pHead);
+	AscendingCourse(s.pHead->pSchoolHead->pNext->pHead->pNext->pNext->pHead);
+	AscendingCourse(s.pHead->pSchoolHead->pNext->pNext->pHead->pHead);
+	AscendingCourse(s.pHead->pSchoolHead->pNext->pNext->pHead->pNext->pHead);
+	AscendingCourse(s.pHead->pSchoolHead->pNext->pNext->pHead->pNext->pNext->pHead);
+	
+	BuildCourse(s.pHead);
 
 	Staff* tmp = s.pHead->pNext;
 	while (tmp != NULL) {
@@ -242,10 +271,8 @@ void Build(School &s) {
 		tmp->pSchoolHead = s.pHead->pSchoolHead;
 		tmp = tmp->pNext;
 	}
+	
 
-	cout << s.name;
-	SchoolYear* p = s.pHead->pSchoolHead;
-	//while()
 }
 
 void BuildStaffByReadCSV(School& s, const char* p) {
@@ -388,8 +415,8 @@ void BuildCourseForSemester1_2324(Semester* p) {
 	Course* p28 = CreateCourse("MTH00053", "Ly thuat so", "21CTT2", "Doan Xuan Khanh", 3, 120, "WED", "S4");
 	Course* p29 = CreateCourse("MTH00053", "Ly thuat so", "21CLC2", "Hoang Xuan Vuong", 3, 120, "THU", "S1");
 	Course* p30 = CreateCourse("MTH00053", "Ly thuat so", "21APCS2", "Nguyen Son Lam", 3, 120, "FRI", "S2");
-	Course* p31 = CreateCourse("CSC10251", "Khoa luan tot nghiep", "20C7_3", "Ngo Hoang Duong", 3, 1200, "SAT", "S3");
-	Course* p32 = CreateCourse("CSC10252", "Thuc tap tot nghiep", "20C2_4", "Le Chi Dung", 3, 1200, "MON", "S4");
+	Course* p31 = CreateCourse("CSC10251", "Khoa luan tot nghiep", "20CTT1", "Ngo Hoang Duong", 3, 1200, "SAT", "S3");
+	Course* p32 = CreateCourse("CSC10252", "Thuc tap tot nghiep", "20APCS1", "Le Chi Dung", 3, 1200, "MON", "S4");
 	AddCourse(p, p1); AddCourse(p, p2); AddCourse(p, p3); AddCourse(p, p4); AddCourse(p, p5); AddCourse(p, p6);
 	AddCourse(p, p7); AddCourse(p, p8); AddCourse(p, p9); AddCourse(p, p10); AddCourse(p, p11); AddCourse(p, p12);
 	AddCourse(p, p13); AddCourse(p, p14); AddCourse(p, p15); AddCourse(p, p16); AddCourse(p, p17); AddCourse(p, p18);
@@ -429,8 +456,8 @@ void BuildCourseForSemester2_2324(Semester* p) {
 	Course* p28 = CreateCourse("MTH00052", "Phuong phap tinh", "21CTT1", "Do Thanh Kiet", 3, 120, "THU", "S2");
 	Course* p29 = CreateCourse("MTH00052", "Phuong phap tinh", "21APCS1", "Huynh Phuoc Thanh", 3, 120, "FRI", "S3");
 	Course* p30 = CreateCourse("MTH00052", "Phuong phap tinh", "21CLC2", "Pham Nang Tuan", 3, 120, "SAT", "S4");
-	Course* p31 = CreateCourse("CSC10251", "Khoa luan tot nghiep", "20C2_1", "Truong Hong Hai", 3, 1200, "MON", "S1");
-	Course* p32 = CreateCourse("CSC10252", "Thuc tap tot nghiep", "20C3_2", "Huynh Ngoc Cong Danh", 3, 1200, "TUE", "S2");
+	Course* p31 = CreateCourse("CSC10251", "Khoa luan tot nghiep", "20CTT2", "Truong Hong Hai", 3, 1200, "MON", "S1");
+	Course* p32 = CreateCourse("CSC10252", "Thuc tap tot nghiep", "20APCS2", "Huynh Ngoc Cong Danh", 3, 1200, "TUE", "S2");
 	AddCourse(p, p1); AddCourse(p, p2); AddCourse(p, p3); AddCourse(p, p4); AddCourse(p, p5); AddCourse(p, p6);
 	AddCourse(p, p7); AddCourse(p, p8); AddCourse(p, p9); AddCourse(p, p10); AddCourse(p, p11); AddCourse(p, p12);
 	AddCourse(p, p13); AddCourse(p, p14); AddCourse(p, p15); AddCourse(p, p16); AddCourse(p, p17); AddCourse(p, p18);
@@ -593,6 +620,10 @@ void BuildCourseForSemester2_2122(Semester* p) {
 	Course* p18 = CreateCourse("MTH00051", "Toan ung dung va thong ke", "20CTT2", "Pham Thi Dai Trang", 3, 120, "SAT", "S1");
 	Course* p19 = CreateCourse("MTH00051", "Toan ung dung va thong ke", "20APCS1", "Pham Thanh Huy", 3, 120, "MON", "S2");
 	Course* p20 = CreateCourse("MTH00051", "Toan ung dung va thong ke", "20CLC2", "Tran Thi Diem Le", 3, 120, "TUE", "S3");
+	AddCourse(p, p1); AddCourse(p, p2); AddCourse(p, p3); AddCourse(p, p4); AddCourse(p, p5); AddCourse(p, p6);
+	AddCourse(p, p7); AddCourse(p, p8); AddCourse(p, p9); AddCourse(p, p10); AddCourse(p, p11); AddCourse(p, p12);
+	AddCourse(p, p13); AddCourse(p, p14); AddCourse(p, p15); AddCourse(p, p16); AddCourse(p, p17); AddCourse(p, p18);
+	AddCourse(p, p19); AddCourse(p, p20);
 }
 
 void BuildCourseForSemester3_2122(Semester* p) {
@@ -608,11 +639,13 @@ void BuildCourseForSemester3_2122(Semester* p) {
 	AddCourse(p, p7); AddCourse(p, p10);
 }
 
-void ReadCSVStudentForCourse(const char* p, Course*& c) {
+void ReadCSVStudentForCourse( char* p, Course*& c) {
 	ifstream fin;
 	fin.open(p);
+	if (!fin.is_open()) {
+		return;
+	}
 	string tmp;
-
 	getline(fin, tmp, '\n');
 	while (!fin.eof()) {
 		InforPerSon q;
@@ -632,4 +665,120 @@ void ReadCSVStudentForCourse(const char* p, Course*& c) {
 	}
 	fin.close();
 
+}
+
+char* ConvertStringToCharPath(string a) {
+	char* p = new char[a.size()+1+4 ];
+	strcpy_s(p, a.size() + 1 + 4, a.c_str());
+	strcat_s(p, a.size() + 1 + 4, ".csv");
+	return p;
+}
+
+void BuildCourse(Staff*p) {
+	Course* p1 = p->pSchoolHead->pHead->pHead;
+	Course* p2 = p->pSchoolHead->pHead->pNext->pHead;
+	Course* p3 = p->pSchoolHead->pHead->pNext->pNext->pHead;
+	Course* p4 = p->pSchoolHead->pNext->pHead->pHead;
+	Course* p5 = p->pSchoolHead->pNext->pHead->pNext->pHead;
+	Course* p6 = p->pSchoolHead->pNext->pHead->pNext->pNext->pHead;
+	Course* p7 = p->pSchoolHead->pNext->pNext->pHead->pHead;
+	Course* p8 = p->pSchoolHead->pNext->pNext->pHead->pNext->pHead;
+	Course* p9 = p->pSchoolHead->pNext->pNext->pHead->pNext->pNext->pHead;
+	while (p1 != NULL) {
+		char* path = ConvertStringToCharPath(p1->ClassName);
+		ReadCSVStudentForCourse(path, p1);
+		p1 = p1->pNext;
+	}
+	while (p2 != NULL) {
+		char* path = ConvertStringToCharPath(p2->ClassName);
+		ReadCSVStudentForCourse(path, p2);
+		p2 = p2->pNext;
+	}
+	while (p3 != NULL) {
+		char* path = ConvertStringToCharPath(p3->ClassName);
+		ReadCSVStudentForCourse(path, p3);
+		p3 = p3->pNext;
+	}
+	while (p4 != NULL) {
+		char* path = ConvertStringToCharPath(p4->ClassName);
+		ReadCSVStudentForCourse(path, p4);
+		p4 = p4->pNext;
+	}
+	while (p5 != NULL) {
+		char* path = ConvertStringToCharPath(p5->ClassName);
+		ReadCSVStudentForCourse(path, p5);
+		p5 = p5->pNext;
+	}
+	while (p6 != NULL) {
+		char* path = ConvertStringToCharPath(p6->ClassName);
+		ReadCSVStudentForCourse(path, p6);
+		p6 = p6->pNext;
+	}
+	while (p7!= NULL) {
+		char* path = ConvertStringToCharPath(p7->ClassName);
+		ReadCSVStudentForCourse(path, p7);
+		p7 = p7->pNext;
+	}
+	while (p8 != NULL) {
+		char* path = ConvertStringToCharPath(p8->ClassName);
+		ReadCSVStudentForCourse(path, p8);
+		p8 = p8->pNext;
+	}
+	while (p9 != NULL) {
+		char* path = ConvertStringToCharPath(p9->ClassName);
+		ReadCSVStudentForCourse(path, p9);
+		p9 = p9->pNext;
+	}
+}
+
+void AscendingCourse(Course*& pHead) {
+	if (pHead == NULL || pHead->pNext==NULL) return;
+	Course* p = pHead;
+	while (p->pNext != NULL) {
+		Course* q = p->pNext;
+		while (q != NULL) {
+			if (p->CourseName.compare(q->CourseName) == 1) {
+				swap(p->ClassName, q->ClassName);
+				swap(p->CourseID, q->CourseID);
+				swap(p->CourseName, q->CourseName);
+				swap(p->TeacherName, q->TeacherName);
+				swap(p->Credit, q->Credit);
+				swap(p->DayOfWeek, q->DayOfWeek);
+				swap(p->Session, q->Session);
+				swap(p->Size, q->Size);
+			}
+			q = q->pNext;
+		}
+		p = p->pNext;
+	}
+}
+
+void AscendingStudentInCourse(Student*& pHead) {
+	if (pHead == NULL || pHead->pNextCourse == NULL) return;
+	Student* p = pHead;
+	while (p->pNextCourse != NULL) {
+		Student* q = pHead->pNextCourse;
+		while (q != NULL) {
+			if (p->Info.ID.compare(q->Info.ID) == 1) {
+				swap(p->Info, q->Info);
+			}
+			q = q->pNextCourse;
+		}
+		p = p->pNextCourse;
+	}
+}
+
+void AscendingStudentInClass(Student*& pHead) {
+	if (pHead == NULL || pHead->pNextClass == NULL) return;
+	Student* p = pHead;
+	while (p->pNextClass != NULL) {
+		Student* q = pHead->pNextClass;
+		while (q != NULL) {
+			if (p->Info.ID.compare(q->Info.ID) == 1) {
+				swap(p->Info, q->Info);
+			}
+			q = q->pNextClass;
+		}
+		p = p->pNextClass;
+	}
 }
