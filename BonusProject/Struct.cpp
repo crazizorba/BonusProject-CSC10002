@@ -838,6 +838,6 @@ string getPassword(){
 	}
 
 	cout << endl;
-
+		
 	return password;
 }
