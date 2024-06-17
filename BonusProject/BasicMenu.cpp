@@ -115,7 +115,6 @@ void MainMenu() {
 		}
 		case ENTER:
 			system("cls");
-			push_enter_main_menu(y);
 		}
 		for (int i = 0; i < n; i++) {
 			mau[i] = MAUCHU;
@@ -162,8 +161,7 @@ void LoginMenu() {
 	
 	
 	int n = 2;
-	string z;
-	string s;
+	
 
 	textColor(MAUNEN);
 	gotoxy(47, 11);
@@ -190,23 +188,24 @@ void LoginMenu() {
 	textColor(MAUNEN);
 	gotoxy(47, 11);
 	cout << "ID:";
-	cin >> z;
+	string id;
+	cin >> id;
 	textColor(7);
 	gotoxy(47, 11);
-	cout << "ID:" << z;
+	cout << "ID:" << id;
 
 	gotoxy(47, 15);
 	textColor(MAUNEN);
 	cout << "Password:";
-	cin >> s;
+	string pass = getPassword();
 	textColor(7);
 	gotoxy(47, 15);
-	cout << "Password:" << s;
-
+	cout << "Password:" ;
+	for (int i = 0;i < pass.size();i++)cout << "*";
 
 	mau[0] = MAUNEN;
 	while (1) {
-		ShowCur(true);
+		ShowCur(false);
 		deleteScreen();
 		textColor(MAUNEN);
 		int tmp = tt;
@@ -254,7 +253,6 @@ void LoginMenu() {
 			MainMenu();
 		case ENTER:
 			system("cls");
-			push_enter_menu_login_2(y);
 		}
 		for (int i = 0; i < n; i++) {
 			mau[i] = MAUCHU;
@@ -309,7 +307,6 @@ void AboutusMenu() {
 		MainMenu();
 	case ENTER:
 		system("cls");
-		MainMenu();
 	
 	}
 	gotoxy(45, 22);
@@ -349,7 +346,6 @@ void HelpMenu() {
 		MainMenu();
 	case ENTER:
 		system("cls");
-		MainMenu();
 	
 	}
 	gotoxy(45, 22);
@@ -422,7 +418,6 @@ void StudentMenu() {
 			break;
 		case ENTER:
 			system("cls");
-			push_enter_student_menu(y);
 			break;
 		}
 		for (int i = 0; i < n; i++) {
@@ -518,7 +513,6 @@ void StaffMenu() {
 			LoginMenu();
 		case ENTER:
 			system("cls");
-			push_enter_staff_menu(y);
 		}
 		for (int i = 0; i < n; i++) {
 			mau[i] = MAUCHU;
@@ -626,7 +620,6 @@ void Create_School_Year_Menu() {
 			MainMenu();
 		case ENTER:
 			system("cls");
-			push_enter_menu_login_2(y);
 		}
 		for (int i = 0; i < n; i++) {
 			mau[i] = MAUCHU;
@@ -714,12 +707,6 @@ void Info_Menu() {
 		//	StaffMenu();
 		case ENTER:
 			system("cls");
-			if (y == 10) {
-				StaffMenu();
-			}
-			else {
-				StaffMenu();
-			}
 		}
 		for (int i = 0; i < n; i++) {
 			mau[i] = MAUCHU;

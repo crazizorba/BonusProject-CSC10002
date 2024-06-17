@@ -14,9 +14,9 @@ void StaticMain() {
 		cin >> tc1;
 		if (tc1 == 1) {
 			clrscr();
-			Staff* p = LoginStaff(c);
-			if (p == NULL) cout << "Sai tai khoan hoac mat khau\n";
-			else cout << p->Info.LastName << " " << p->Info.FirstName << endl;
+			//Staff* p = LoginStaff(c);
+			//if (p == NULL) cout << "Sai tai khoan hoac mat khau\n";
+			//else cout << p->Info.LastName << " " << p->Info.FirstName << endl;
 			int n;
 			cin >> n;
 
@@ -805,16 +805,10 @@ void AscendingStudentInClass(Student*& pHead) {
 
 //------WORKING FUNCTION-----
 
-Staff* LoginStaff(School c) {
-	string id;
-	string pass;
-	cout << "ID: ";
-	cin >> id;
-	cout << "Password: ";
-	pass = getPassword();
+Staff* LoginStaff(School c, string a, string b) {
 	Staff* p = c.pHead;
 	while (p != NULL) {
-		if (id.compare(p->Info.ID) == 0 || pass.compare(p->Info.Password) == 0) return p;
+		if (a.compare(p->Info.ID) == 0 || b.compare(p->Info.Password) == 0) return p;
 		p = p->pNext;
 	}
 	return p;
