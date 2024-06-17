@@ -52,10 +52,13 @@ TRANGTHAI key(int z) {
 		}
 	}
 	else if (z == 13) return ENTER;
+	else if (z == 8) return BACKSPACE;
 }
 
 
 void MainMenu() {
+	School c;
+	Build(c);
 	int y = 10;
 	int n = 4;
 	str thaotac[4] = { "Login", "About us","Help","Exit"};
@@ -151,35 +154,38 @@ void push_enter_main_menu(int y) {
 
 
 void LoginMenu() {
-	string a = { "ID:" };
-	string b = { "Password:" };
+	
 	string c = { "Staff" };
 	string d = { "Student" };
 	int y = 10;
+	
+	
+	
 	int n = 2;
 	string z;
 	string s;
+
 	textColor(MAUNEN);
 	gotoxy(47, 11);
 	cout << "ID:";
 	textColor(7);
 	gotoxy(47, 15);
 	cout << "Password:";
-	writeText(48, 20, c, 7);
-	writeText(67, 20, d, 7);
 	str thaotac[2] = { "Staff", "Student" };
+
 	int tt = 0;
 	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
 	drawBox(XboxLG_1, YboxLG_1, WboxLG, HboxLG, MAUCHU);
 	drawBox(XboxLG_2, YboxLG_2, WboxLG, HboxLG, MAUCHU);
-	drawBox(45, 19, 10, 2, MAUCHU);
-	drawBox(65, 19, 10, 2, MAUCHU);
+	drawBox(45, 18, 10, 2, MAUCHU);
+	drawBox(65, 18, 10, 2, MAUCHU);
 	int* mau = new int[n];
 	writeText(central(WConsole, "LOGIN"), Upbox, "LOGIN", MAUCHU);
 	for (int i = 0; i < n; i++) {
 		mau[i] = MAUCHU;
 	}
-
+	writeText(48, 19, c, 7);
+	writeText(67, 19, d, 7);
 
 	textColor(MAUNEN);
 	gotoxy(47, 11);
@@ -187,7 +193,8 @@ void LoginMenu() {
 	cin >> z;
 	textColor(7);
 	gotoxy(47, 11);
-	cout << "ID:"<<z;
+	cout << "ID:" << z;
+
 	gotoxy(47, 15);
 	textColor(MAUNEN);
 	cout << "Password:";
@@ -199,22 +206,16 @@ void LoginMenu() {
 
 	mau[0] = MAUNEN;
 	while (1) {
-		ShowCur(false);
+		ShowCur(true);
 		deleteScreen();
 		textColor(MAUNEN);
 		int tmp = tt;
 		for (int i = 0; i < n; i++) {
-			/*if (thaotac[i] == a) {
-				writeText(47, 11, thaotac[i], mau[i]);
-			}
-			if (thaotac[i] == b) {
-				writeText(47, 15, thaotac[i], mau[i]);
-			}*/
 			if (thaotac[i] == c) {
-				writeText(48, 20, thaotac[i], mau[i]);
+				writeText(48, 19, thaotac[i], mau[i]);
 			}
 			if (thaotac[i] == d) {
-				writeText(67, 20, thaotac[i], mau[i]);
+				writeText(67, 19, thaotac[i], mau[i]);
 			}
 			gotoxy(50, 11);
 		}
@@ -273,6 +274,8 @@ void push_enter_menu_login_2(int y) {
 	case 11:
 		StudentMenu();
 		break;
+	case 14:
+		MainMenu();
 	}
 }
 
@@ -307,6 +310,7 @@ void AboutusMenu() {
 	case ENTER:
 		system("cls");
 		MainMenu();
+	
 	}
 	gotoxy(45, 22);
 	cout << "press ";
@@ -346,6 +350,7 @@ void HelpMenu() {
 	case ENTER:
 		system("cls");
 		MainMenu();
+	
 	}
 	gotoxy(45, 22);
 	cout << "press ";
