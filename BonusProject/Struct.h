@@ -6,6 +6,7 @@
 #include<fstream>
 #include<vector>
 #include<sstream>
+#include"GraphicBasic.h"
 
 
 using namespace std;
@@ -164,4 +165,9 @@ void AscendingStudentInCourse(Student*&pHead);
 
 void AscendingStudentInClass(Student*& pHead);
 
+int CountSchoolYearNode(Staff* p);
+
+Staff* LoginStaff(School c);
+
+string getPassword();
 #endif

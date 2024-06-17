@@ -3,6 +3,7 @@
 
 
 #include"GraphicBasic.h"
+#include"Struct.h"
 #include<iostream>
 #include<Windows.h>
 #include<cstdlib>
@@ -12,7 +13,7 @@ using namespace std;
 
 
 
-enum TRANGTHAI { UP, DOWN, LEFT, RIGHT, ENTER };
+enum TRANGTHAI { UP, DOWN, LEFT, RIGHT, ENTER, BACKSPACE };
 typedef char str[31];
 
 
@@ -26,6 +27,7 @@ void push_enter_main_menu(int y);
 void push_enter_menu_login_2(int y);
 
 void LoginMenu();
+
 void StudentMenu();
 void push_enter_student_menu(int y);
 void StaffMenu();

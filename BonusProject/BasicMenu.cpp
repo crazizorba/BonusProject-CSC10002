@@ -52,10 +52,13 @@ TRANGTHAI key(int z) {
 		}
 	}
 	else if (z == 13) return ENTER;
+	else if (z == 8) return BACKSPACE;
 }
 
 
 void MainMenu() {
+	School c;
+	Build(c);
 	int y = 10;
 	int n = 4;
 	str thaotac[4] = { "Login", "About us","Help","Exit"};
@@ -157,13 +160,13 @@ void LoginMenu() {
 	string d = { "Student" };
 	int y = 10;
 	int n = 4;
-	str thaotac[4] = { "ID:", "Password:","Staff", "Student" };
+	str thaotac[4] = { "ID:", "Password:","Staff", "Student"};
 	int tt = 0;
 	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
 	drawBox(XboxLG_1, YboxLG_1, WboxLG, HboxLG, MAUCHU);
 	drawBox(XboxLG_2, YboxLG_2, WboxLG, HboxLG, MAUCHU);
-	drawBox(45, 19, 10, 2, MAUCHU);
-	drawBox(65, 19, 10, 2, MAUCHU);
+	drawBox(45, 18, 10, 2, MAUCHU);
+	drawBox(65, 18, 10, 2, MAUCHU);
 	int* mau = new int[n];
 	writeText(central(WConsole, "LOGIN"), Upbox, "LOGIN", MAUCHU);
 	for (int i = 0; i < n; i++) {
@@ -171,7 +174,7 @@ void LoginMenu() {
 	}
 	mau[0] = MAUNEN;
 	while (1) {
-		ShowCur(false);
+		ShowCur(true);
 		deleteScreen();
 		textColor(MAUNEN);
 		int tmp = tt;
@@ -183,10 +186,10 @@ void LoginMenu() {
 				writeText(47, 15, thaotac[i], mau[i]);
 			}
 			if (thaotac[i] == c) {
-				writeText(48, 20, thaotac[i], mau[i]);
+				writeText(48, 19, thaotac[i], mau[i]);
 			}
 			if (thaotac[i] == d) {
-				writeText(67, 20, thaotac[i], mau[i]);
+				writeText(67, 19, thaotac[i], mau[i]);
 			}
 			gotoxy(50, 11);
 		}
@@ -245,6 +248,8 @@ void push_enter_menu_login_2(int y) {
 	case 13:
 		StudentMenu();
 		break;
+	case 14:
+		MainMenu();
 	}
 }
 
@@ -276,6 +281,10 @@ void AboutusMenu() {
 	case ENTER:
 		system("cls");
 		MainMenu();
+	case UP:
+		AboutusMenu();
+	case DOWN:
+		AboutusMenu();
 	}
 }
 
@@ -305,6 +314,10 @@ void HelpMenu() {
 	case ENTER:
 		system("cls");
 		MainMenu();
+	case UP:
+		HelpMenu();
+	case DOWN:
+		HelpMenu();
 	}
 }
 

@@ -1,7 +1,27 @@
 #include"Struct.h"
 
 void StaticMain() {
-	
+	School c;
+	Build(c);
+	if (1) {
+		clrscr();
+		cout << "1. Login"<<endl;
+		cout << "2.About us" << endl;
+		cout << "3. Help" << endl;
+		cout << "4. Exit" << endl;
+		cout << "**Nhap lua chon: ";
+		int tc1;
+		cin >> tc1;
+		if (tc1 == 1) {
+			clrscr();
+			Staff* p = LoginStaff(c);
+			if (p == NULL) cout << "Sai tai khoan hoac mat khau\n";
+			else cout << p->Info.LastName << " " << p->Info.FirstName << endl;
+			int n;
+			cin >> n;
+
+		}
+	}
 
 }
 
@@ -781,4 +801,43 @@ void AscendingStudentInClass(Student*& pHead) {
 		}
 		p = p->pNextClass;
 	}
+}
+
+//------WORKING FUNCTION-----
+
+Staff* LoginStaff(School c) {
+	string id;
+	string pass;
+	cout << "ID: ";
+	cin >> id;
+	cout << "Password: ";
+	pass = getPassword();
+	Staff* p = c.pHead;
+	while (p != NULL) {
+		if (id.compare(p->Info.ID) == 0 || pass.compare(p->Info.Password) == 0) return p;
+		p = p->pNext;
+	}
+	return p;
+}
+
+string getPassword(){
+	string password;
+	char ch;
+
+	while ((ch = _getch()) != '\r') {
+		if (ch == '\b') {
+			if (!password.empty()){
+				password.pop_back();
+				cout << "\b"<<"\b"; 
+			}
+		}
+		else{
+			password.push_back(ch);
+			cout << "*";
+		}
+	}
+
+	cout << endl;
+
+	return password;
 }
