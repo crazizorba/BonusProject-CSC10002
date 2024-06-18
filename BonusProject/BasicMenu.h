@@ -20,33 +20,51 @@ TRANGTHAI key(int z);
 void SuccessMenu();
 
 void MainMenu();
+	void LoginMenu();
+		void StaffMenu();
+			void CreateSchoolYearMenu();
+			void ViewschoolyearMenu();
+				void CreateSemesterMenu();
+				void ViewSemesterMenu();
+					void SpringMenu();
+						void CreateCourseMenu();
+						void ViewCourseMenu();
+							void Course_1_Menu();
+					void SummerMenu();
+					void CreateCourseMenu();
+					void ViewCourseMenu();
+						void Course_1_Menu();
+					void FallMenu();
+					void CreateCourseMenu();
+					void ViewCourseMenu();
+						void Course_1_Menu();
+			void Info_Menu();
+		void StudentMenu();
+	void AboutusMenu();
+	void HelpMenu();
+
+
+
+	
+
+	
+
 void push_enter_main_menu(int y);
 
-void LoginMenu();
 void push_enter_menu_login_2(int y);
 
-
-
-void LoginMenu();
-
-void StudentMenu();
-void push_enter_student_menu(int y);
-void StaffMenu();
-void push_enter_staff_menu(int y);
-
-void AboutusMenu();
-void HelpMenu();
-
-void StudentMenu();
 void push_enter_student_menu(int y);
 
-void StaffMenu();
 void push_enter_staff_menu(int y);
-void Create_School_Year_Menu();
-void Cre_sy_menu(int y);
-void ViewschoolyearMenu();
 
-void Info_Menu();
+void push_cre_sy_menu(int y);
+
+void push_enter_view_semester_list(int y);
+
+void push_enter_season_menu(int y);
+
+void push_enter_view_course_list(int y);
+
 
 
 #endif
