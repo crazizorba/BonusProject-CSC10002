@@ -4,7 +4,8 @@
 
 
 int main() {
-	MainMenu();
+	Staff* p = new Staff;
+	MainMenu(p);
 	
 	
 	
