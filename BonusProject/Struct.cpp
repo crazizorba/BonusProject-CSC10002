@@ -808,7 +808,7 @@ void AscendingStudentInClass(Student*& pHead) {
 Staff* LoginStaff(School c, string a, string b) {
 	Staff* p = c.pHead;
 	while (p != NULL) {
-		if (a.compare(p->Info.ID) == 0 || b.compare(p->Info.Password) == 0) return p;
+		if (a.compare(p->Info.ID) == 0 && b.compare(p->Info.Password) == 0) return p;
 		p = p->pNext;
 	}
 	return p;
@@ -832,6 +832,43 @@ string getPassword(){
 	}
 
 	cout << endl;
-
+		
 	return password;
+}
+
+bool checkSchoolYear(Staff* s, string a) {
+	SchoolYear* p = s->pSchoolHead;
+	while (p != NULL) {
+		if (p->Year.compare(a) == 0) return false;
+		p = p->pNext;
+	}
+	for (int i = 0;i < a.size();i++) {
+		if(isalpha(a[i])) return false;
+	}
+	if (a.size() != 9) return false;
+	return true;
+}
+
+Student* LoginStudent(School c, string a, string b) {
+	Class* p = c.pHead->pClassHead;
+	while (p != NULL) {
+		Student* q = p->pHead;
+		while (q != NULL) {
+			if (a.compare(q->Info.ID) == 0 && b.compare(q->Info.Password) == 0) return q;
+			q = q->pNextClass;
+		}
+		p = p->pNext;
+	}
+	return NULL;
+}
+
+int CountNodeSchoolYear(Staff* p) {
+	int i = 0;
+	SchoolYear* q = p->pSchoolHead;
+	if (q == NULL) return i;
+	while (q != NULL) {
+		i++;
+		q = q->pNext;
+	}
+	return i;
 }

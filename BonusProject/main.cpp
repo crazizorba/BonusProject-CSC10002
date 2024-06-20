@@ -1,11 +1,12 @@
 ﻿#include"GraphicBasic.h"
 #include"BasicMenu.h"
 #include"Struct.h"
+#include"Merge.h"
 
 
 int main() {
-	MainMenu();
-	
+	MainMenu_s();
+
 	
 	
 	system("pause");

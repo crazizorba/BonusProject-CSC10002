@@ -153,13 +153,11 @@ void push_enter_main_menu(int y) {
 
 
 void LoginMenu() {
-	
+	string z;
+	string s;
 	string c = { "Staff" };
 	string d = { "Student" };
 	int y = 10;
-	
-	
-	
 	int n = 2;
 	
 
@@ -177,6 +175,7 @@ void LoginMenu() {
 	drawBox(XboxLG_2, YboxLG_2, WboxLG, HboxLG, MAUCHU);
 	drawBox(45, 18, 10, 2, MAUCHU);
 	drawBox(65, 18, 10, 2, MAUCHU);
+
 	int* mau = new int[n];
 	writeText(central(WConsole, "LOGIN"), Upbox, "LOGIN", MAUCHU);
 	for (int i = 0; i < n; i++) {
@@ -222,7 +221,7 @@ void LoginMenu() {
 		int z = _getch();
 		TRANGTHAI trangthai = key(z);
 		switch (trangthai) {
-		case UP:
+		case LEFT:
 		{
 			if (tt == 0)
 			{
@@ -236,7 +235,7 @@ void LoginMenu() {
 			break;
 
 		}
-		case DOWN:
+		case RIGHT:
 		{
 			if (tt == n - 1) {
 				tt = 0;
@@ -248,9 +247,6 @@ void LoginMenu() {
 			}
 			break;
 		}
-		case LEFT:
-			system("cls");
-			MainMenu();
 		case ENTER:
 			system("cls");
 		}
@@ -267,9 +263,11 @@ void LoginMenu() {
 void push_enter_menu_login_2(int y) {
 	switch (y) {
 	case 10:
+		SuccessMenu();
 		StaffMenu();
 		break;
 	case 11:
+		SuccessMenu();
 		StudentMenu();
 		break;
 	case 14:
@@ -534,7 +532,7 @@ void push_enter_staff_menu(int y) {  //"Infomation","Course", "Class","Score","B
 		Create_School_Year_Menu();
 		break;
 	case 11:
-		LoginMenu();
+		ViewschoolyearMenu();
 		break;
 	case 12:
 		LoginMenu();
@@ -551,49 +549,61 @@ void push_enter_staff_menu(int y) {  //"Infomation","Course", "Class","Score","B
 	}
 }
 
-/*	string ID;
-	string FirstName;
-	string LastName;
-	int Gender;
-	string DateOfBirth;//dd/mm/yyyy
-	string SocialID;*/
 void Create_School_Year_Menu() {
-	string a = { "ID:" };
-	string b = { "FirstName:" };
-	string c = { "LastName:" };
-	string d = { "Gender:" };
-	string e = { "DateOfBirth:" };
-	string f = { "SocialID:" };
 	int y = 10;
-	int n = 6;
-	str thaotac[6] = { "ID:","FirstName:", "LastName:","Gender:", "DateOfBirth:","SocialID:" };
+	int n = 2;
 	int tt = 0;
+	string a = { "CREATE" };
+	string b = { "BACK" };
+	str thaotac[2] = { "CREATE","BACK" };
+
 	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
-	drawBox(42, 9, 8, 5, MAUCHU);
+	drawBox(45, 10, 30, 2, MAUCHU);
+	drawBox(45, 15, 10, 2, MAUCHU);
+	drawBox(65, 15, 10, 2, MAUCHU);
+	gotoxy(47, 16);
+	cout << "CREATE";
+	gotoxy(69, 16);
+	cout << "BACK";
 
 	int* mau = new int[n];
-	writeText(central(WConsole, "PERSONAL INFORMATION"), 7, "PERSONAL INFORMATION", MAUCHU);
+	writeText(central(WConsole, "CREATE SCHOOL YEAR"), 7, "CREATE SCHOOL YEAR", MAUCHU);
 	for (int i = 0; i < n; i++) {
 		mau[i] = MAUCHU;
 	}
 	mau[0] = MAUNEN;
+
+	textColor(MAUNEN);
+	gotoxy(47, 11);
+	string year;
+	cout << "school year:";
+	cin >> year;
+	textColor(7);
+	gotoxy(47, 11);
+	cout << "school year:" << year;
+	
 	while (1) {
 		ShowCur(false);
 		deleteScreen();
 		textColor(MAUNEN);
 		int tmp = tt;
 		for (int i = 0; i < n; i++) {
-			writeText(54, 9 + i, thaotac[i], mau[i]);
+			if (thaotac[i] == a) {
+				writeText(47, 16, thaotac[i], mau[i]);
+			}
+			if (thaotac[i] == b) {
+				writeText(69, 16, thaotac[i], mau[i]);
+			}
 		}
 
 		int z = _getch();
 		TRANGTHAI trangthai = key(z);
 		switch (trangthai) {
-		case UP:
+		case LEFT:
 		{
 			if (tt == 0)
 			{
-				y = 13;
+				y = 11;
 				tt = n - 1;
 			}
 			else {
@@ -603,7 +613,7 @@ void Create_School_Year_Menu() {
 			break;
 
 		}
-		case DOWN:
+		case RIGHT:
 		{
 			if (tt == n - 1) {
 				tt = 0;
@@ -615,9 +625,6 @@ void Create_School_Year_Menu() {
 			}
 			break;
 		}
-		case LEFT:
-			system("cls");
-			MainMenu();
 		case ENTER:
 			system("cls");
 		}
@@ -629,16 +636,56 @@ void Create_School_Year_Menu() {
 	}
 }
 
+void Cre_sy_menu(int y) {
+	switch (y) {
+	case 10:
+		SuccessMenu();
+		StaffMenu();
+		break;
+	case 11:
+		StaffMenu();
+		break;
+
+	}
+}
+
+void SuccessMenu(){
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+	gotoxy(45, 9);
+	cout << "Create scucess press ";
+	textColor(MAUNEN);
+	cout << "ENTER";
+	textColor(7);
+	cout << " to " << endl;
+	gotoxy(43, 10);
+	cout << "continue.....";
+	int z = _getch();
+	TRANGTHAI trangthai = key(z);
+	switch (trangthai) {
+	case UP:
+	{
+		SuccessMenu();
+		break;
+	}
+	case DOWN:
+	{
+		SuccessMenu();
+		break;
+	}
+	case ENTER:
+		system("cls");
+		break;
+	}
+}
+
+void ViewschoolyearMenu() {
+	
+
+}
 
 void Info_Menu() {
-	string a = { "ID:" };
-	string b = { "FirstName:" };
-	string c = { "LastName:" };
-	string d = { "Gender:" };
-	string e = { "DateOfBirth:" };
-	string f = { "SocialID:" };
-	string g = { "BACK" };
-	string h = { "EDIT" };
+	string a = { "BACK" };
+	string b = { "EDIT" };
 	int y = 10;
 	int n = 2;
 	str thaotac[2] ={ "BACK", "EDIT" };
@@ -665,10 +712,10 @@ void Info_Menu() {
 		textColor(MAUNEN);
 		int tmp = tt;
 		for (int i = 0; i < n; i++) {
-			if (thaotac[i] == g) {
+			if (thaotac[i] == a) {
 				writeText(46, 21, thaotac[i], mau[i]);
 			}
-			if (thaotac[i] == h) {
+			if (thaotac[i] == b) {
 				writeText(70, 21, thaotac[i], mau[i]);
 			}
 		}
@@ -702,9 +749,6 @@ void Info_Menu() {
 			}
 			break;
 		}
-		//case LEFT:
-		//	system("cls");
-		//	StaffMenu();
 		case ENTER:
 			system("cls");
 		}

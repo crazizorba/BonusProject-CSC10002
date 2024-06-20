@@ -15,37 +15,59 @@ using namespace std;
 
 enum TRANGTHAI { UP, DOWN, LEFT, RIGHT, ENTER, BACKSPACE };
 typedef char str[31];
-
-
-
 TRANGTHAI key(int z);
 
+void SuccessMenu();
 
 void MainMenu();
+	void LoginMenu();
+		void StaffMenu();
+			void Create_School_Year_Menu();
+			void Info_Menu();
+			void ViewschoolyearMenu();
+				//CreateSemester
+				//ViewSemesterList
+					//CreateCourse
+					//ViewCourse
+					//InfoCourse
+		void StudentMenu();
+	
+		
+		
+		
+	void AboutusMenu();
+	void HelpMenu();
+	
+	
+	
+	
+	
+
+	
 void push_enter_main_menu(int y);
 
-void LoginMenu();
+
 void push_enter_menu_login_2(int y);
 
 
 
-void LoginMenu();
 
-void StudentMenu();
+
+
 void push_enter_student_menu(int y);
-void StaffMenu();
+
 void push_enter_staff_menu(int y);
 
-void AboutusMenu();
-void HelpMenu();
 
-void StudentMenu();
+
+
+
 void push_enter_student_menu(int y);
 
-void StaffMenu();
+
 void push_enter_staff_menu(int y);
 void Create_School_Year_Menu();
-void Info_Menu();
+void Cre_sy_menu(int y);
 
 
 #endif
