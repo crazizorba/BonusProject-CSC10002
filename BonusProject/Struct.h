@@ -176,4 +176,6 @@ bool checkSchoolYear(Staff *s,string a);
 Student* LoginStudent(School c, string a, string b);
 
 int CountNodeSchoolYear(Staff* p);
+
+SchoolYear* getSchoolYearByNum(Staff* p,int a);
 #endif

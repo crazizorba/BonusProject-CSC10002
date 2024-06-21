@@ -5,8 +5,10 @@
 
 
 int main() {
-	MainMenu_s();
-
+	//Staff* p = new Staff;
+	//MainMenu(p);
+	//MainMenu_s();
+	drawTable(2, 2, 5, 2,5, 7);
 	
 	
 	system("pause");

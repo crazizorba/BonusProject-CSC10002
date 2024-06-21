@@ -218,7 +218,7 @@ void LoginMenu_s(School S) {
 					StaffMenu_s(p);
 				}
 			}
-			else if (tt = 1) {
+			else if (tt == 1) {
 				Student* p = LoginStudent(S, id, pass);
 				if (p == NULL) {
 					writeText(central(WConsole, "Incorrect ID or password."), 22, "Incorrect ID or password.", MAUNEN);
@@ -243,7 +243,7 @@ void LoginMenu_s(School S) {
 
 void StaffMenu_s(Staff*p) {
 	int n = 6;
-	str thaotac[6] = { "Add school year","List school year", "Add course","List course","Personal Information","[LOG OUT]" };
+	str thaotac[6] = { "Add school year","List school year", "Add class","List class","Personal Information","[LOG OUT]" };
 	int tt = 0;
 	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
 	int* mau = new int[n];
@@ -306,6 +306,10 @@ void StaffMenu_s(Staff*p) {
 				clrscr();
 				AddSchoolYearMenu_s(p);
 			}
+			else if (tt == 1) {
+				clrscr();
+				ViewschoolyearList_s(p);
+			}
 		}
 		for (int i = 0; i < n; i++) {
 			mau[i] = MAUCHU;
@@ -341,13 +345,6 @@ void AboutusMenu_s() {
 	int z = _getch();
 	TRANGTHAI trangthai = key(z);
 	switch (trangthai) {
-	case DOWN:
-		AboutusMenu();
-	case UP:
-		AboutusMenu();
-	case LEFT:
-		system("cls");
-		MainMenu();
 	case ENTER:
 		system("cls");
 		MainMenu_s();
@@ -375,13 +372,6 @@ void HelpMenu_s() {
 	int z = _getch();
 	TRANGTHAI trangthai = key(z);
 	switch (trangthai) {
-	case DOWN:
-		HelpMenu();
-	case UP:
-		HelpMenu();
-	case LEFT:
-		system("cls");
-		MainMenu();
 	case ENTER:
 		system("cls");
 		MainMenu_s();
@@ -731,6 +721,169 @@ void InfoMenu_s(Student* p) {
 	}
 }
 
-void ListSchoolYear(Staff* p) {
-	int n = 1 + CountNodeSchoolYear(p);
+void ViewschoolyearList_s(Staff* p) {
+	if (p->pSchoolHead == NULL) {
+		int n = 3;
+		int tt = 0;
+		string a = { "[ADD]" };
+		string b = { "[BACK]" };
+		str thaotac[2] = { "[ADD]","[BACK]" };
+
+		drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+
+		int* mau = new int[n];
+		writeText(central(WConsole, "SCHOOL YEARS"), 7, "SCHOOL YEARS", MAUCHU);
+		for (int i = 0; i < n; i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[0] = MAUNEN;
+		gotoxy(45, 10);
+		cout << "School year is empty.........";
+		while (1) {
+			ShowCur(false);
+			deleteScreen();
+			textColor(MAUNEN);
+			int tmp = tt;
+			for (int i = 0; i < n; i++) {
+				if (thaotac[i] == a) {
+					writeText(47, 12, thaotac[i], mau[i]);
+				}
+				if (thaotac[i] == b) {
+					writeText(56, 14, thaotac[i], mau[i]);
+				}
+			}
+
+			int z = _getch();
+			TRANGTHAI trangthai = key(z);
+			switch (trangthai) {
+			case UP:
+			{
+				if (tt == 0)
+				{
+					tt = n - 1;
+				}
+				else {
+					tt--;
+				}
+				break;
+
+			}
+			case DOWN:
+			{
+				if (tt == n - 1) {
+					tt = 0;
+				}
+				else {
+					tt++;
+				}
+				break;
+			}
+			case ENTER:
+				system("cls");
+				if (tt == 0) {
+					
+				}
+				else if (tt == 1) {
+					StaffMenu_s(p);
+				}
+			}
+			for (int i = 0; i < n; i++) {
+				mau[i] = MAUCHU;
+			}
+			mau[tt] = MAUNEN;
+			textColor(MAUNEN);
+		}
+	}
+
+	int n = count_shoolyear(p->pSchoolHead) + 1;
+	int tt = 0;
+
+	SchoolYear* point = p->pSchoolHead;
+	string* thaotac = new string[n];
+	thaotac[n - 1] = { "[BACK]" };
+
+	for (int i = 0; i < n - 1; i++) {
+		thaotac[i] = point->Year;
+		point = point->pNext;
+	}
+
+
+
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+	int run = 0;
+	for (int i = 0; i < n - 1; i++) {
+		drawBox(45, 10 + run, 30, 2, MAUCHU);
+		run += 2;
+	}
+	for (int i = 0;i < n - 2;i++) {
+		gotoxy(45, 10 + (i+1) * 2);
+		cout << char(195);
+		gotoxy(75, 10 + (i + 1) * 2);
+		cout << char(180);
+	
+	}
+	int* mau = new int[n];
+	writeText(central(WConsole, "SCHOOL YEARS"), 7, "SCHOOL YEARS", MAUCHU);
+	for (int i = 0; i < n; i++) {
+		mau[i] = MAUCHU;
+	}
+	mau[0] = MAUNEN;
+
+	while (1) {
+		ShowCur(false);
+		deleteScreen();
+		textColor(MAUNEN);
+		int tmp = tt;
+		int chay = 0;
+		for (int i = 0; i < n; i++) {
+			if (thaotac[i] == "[BACK]") {
+				writeText(55, 20, thaotac[i], mau[i]);
+			}
+			else {
+				writeText(55, 11 + chay, thaotac[i], mau[i]);
+				chay += 2;
+			}
+		}
+
+		int z = _getch();
+		TRANGTHAI trangthai = key(z);
+		switch (trangthai) {
+		case UP:
+		{
+			if (tt == 0)
+			{
+				tt = n - 1;
+			}
+			else {
+				tt--;
+			}
+			break;
+
+		}
+		case DOWN:
+		{
+			if (tt == n - 1) {
+				tt = 0;
+			}
+			else {
+				tt++;
+			}
+			break;
+		}
+		case ENTER:
+			system("cls");
+			if (tt = n - 1) {
+				StaffMenu_s(p);
+			}
+			else {
+				SchoolYear* q = getSchoolYearByNum(p, tt);
+			}
+		}
+		for (int i = 0; i < n; i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[tt] = MAUNEN;
+		textColor(MAUNEN);
+	}
 }
+

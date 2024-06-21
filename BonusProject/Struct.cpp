@@ -872,3 +872,13 @@ int CountNodeSchoolYear(Staff* p) {
 	}
 	return i;
 }
+
+SchoolYear* getSchoolYearByNum(Staff* p,int a) {
+	SchoolYear* q = p->pSchoolHead;
+	int i = 0;
+	while (i != a) {
+		q = q->pNext;
+		i++;
+	}
+	return q;
+}

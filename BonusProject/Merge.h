@@ -24,7 +24,8 @@ void MainMenu_s();
 		void StaffMenu_s(Staff* p);
 			void AddSchoolYearMenu_s(Staff* &p);
 			void InfoMenu_s(Staff*p);
-
+			void ViewschoolyearList_s(Staff* p);
+				void SchoolYearMenu_s(Staff* p);
 		void StudentMenu_s(Student *p);
 			void InfoMenu_s(Student* p);
 

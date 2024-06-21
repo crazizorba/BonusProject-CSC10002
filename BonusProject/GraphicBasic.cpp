@@ -144,3 +144,15 @@ int central(int w, string a) {
 	int x = a.length() / 2;
 	return i - x;
 }
+
+void drawTable(int x, int y, int w, int h, int row, int t_color) {
+	for (int i = 0;i < row;i++) {
+		drawBox(x, y+i*h, w, h, t_color);
+	}
+	for (int i = 0;i < row-1;i++) {
+		gotoxy(x, y + (i + 1) * h);
+		cout << char(195);
+		gotoxy(x+w, y + (i + 1) * h);
+		cout << char(180);
+	}
+}
