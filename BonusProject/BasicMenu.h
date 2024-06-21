@@ -40,6 +40,8 @@ void MainMenu(Staff* p);
 							void ViewCourseMenu(Staff* p);
 								void Course_1_Menu(Staff* p);
 			void Info_Menu(Staff* p);
+				void EditinfoMenu(Staff* p);
+			void ChangePasswordMenu(Staff* p);
 		void StudentMenu(Staff* p);
 	void AboutusMenu(Staff* p);
 	void HelpMenu(Staff* p);
@@ -47,7 +49,6 @@ void MainMenu(Staff* p);
 
 
 
-	
 
 void push_enter_main_menu(int y, Staff* p);
 
@@ -66,9 +67,19 @@ void push_enter_season_menu(int y, Staff* p);
 void push_enter_view_course_list(int y, Staff* p);
 
 
+void push_enter_editinfo_menu(int y, Staff* p);
 
+void Edit_ID_Menu(Staff* p);
 
+void Edit_Firstname_Menu(Staff* p);
 
+void Edit_Lastname_Menu(Staff* p);
+
+void Edit_Gender_Menu(Staff* p);
+
+void Edit_DateOfBirth_Menu(Staff* p);
+
+void Edit_SocialID_Menu(Staff* p);
 
 int count_shoolyear(SchoolYear* p);
 
