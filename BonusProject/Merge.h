@@ -30,7 +30,7 @@ void MainMenu_s();
 			void InfoMenu_s(Student* p);
 
 
-			void ListSchoolYear(Staff* p);
+			
 
 
 #endif
