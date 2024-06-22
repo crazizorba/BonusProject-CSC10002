@@ -58,6 +58,7 @@ TRANGTHAI key(int z) {
 
 void MainMenu(Staff* p) {
 	p->pSchoolHead = init_sy();
+	//p->pSchoolHead->pHead = init_s();
 	School c;
 	Build(c);
 	int y = 10;
@@ -161,7 +162,7 @@ void LoginMenu(Staff* p) {
 	string d = { "[ Student ]" };
 	int y = 10;
 	int n = 2;
-	int tt = 0;
+	
 
 	textColor(MAUNEN);
 	gotoxy(47, 11);
@@ -171,7 +172,7 @@ void LoginMenu(Staff* p) {
 	cout << "Password:";
 	str thaotac[2] = { "[ Staff ]", "[ Student ]" };
 
-
+	int tt = 0;
 	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
 	drawBox(XboxLG_1, YboxLG_1, WboxLG, HboxLG, MAUCHU);
 	drawBox(XboxLG_2, YboxLG_2, WboxLG, HboxLG, MAUCHU);
@@ -188,23 +189,24 @@ void LoginMenu(Staff* p) {
 	textColor(MAUNEN);
 	gotoxy(47, 11);
 	cout << "ID:";
-	cin >> z;
+	string id;
+	cin >> id;
 	textColor(7);
 	gotoxy(47, 11);
-	cout << "ID:" << z;
+	cout << "ID:" << id;
 
 	gotoxy(47, 15);
 	textColor(MAUNEN);
 	cout << "Password:";
-	cin >> s;
+	string pass = getPassword();
 	textColor(7);
 	gotoxy(47, 15);
-	cout << "Password:" << s;
-
+	cout << "Password:" ;
+	for (int i = 0;i < pass.size();i++)cout << "*";
 
 	mau[0] = MAUNEN;
 	while (1) {
-		ShowCur(true);
+		ShowCur(false);
 		deleteScreen();
 		textColor(MAUNEN);
 		int tmp = tt;
@@ -571,7 +573,9 @@ void ChangePasswordMenu(Staff* p) {
 	cout << "Old Password: ";
 	gotoxy(45, 11);
 	cout << "New Password: ";
-	
+	gotoxy(45, 12);
+	cout << "New Password Again: ";
+
 	gotoxy(45, 16);
 	cout << "[ SAVE ]";
 	gotoxy(65, 16);
@@ -697,6 +701,7 @@ void CreateSchoolYearMenu(Staff* p) {
 	cout << "school year:" << year;
 	
 	SchoolYear* point = cre(year);
+	point->pHead = init_s();
 	add_year(p, point);
 
 	while (1) {
@@ -829,14 +834,7 @@ int count_shoolyear(SchoolYear* p) {
 }
 	
 void ViewschoolyearMenu(Staff* p) {
-	/*//p->pSchoolHead = init_sy();
-	SchoolYear* tmp = new SchoolYear;
 	
-	string a[3] = { "2021-2022","2022-2023","2023-2024" };
-	for (int i = 0; i < 3; i++) {
-		tmp = cre(a[i]);
-		add_year(p, tmp);
-	}*/
 	if (p->pSchoolHead == NULL) {
 		int y = 10;
 		int n = 2;
@@ -991,7 +989,7 @@ void ViewschoolyearMenu(Staff* p) {
 		}
 		case ENTER:
 			system("cls");
-			push_enter_view_semester_list(y, n,p);
+			push_enter_view_schoolyear_list(y, n,p);
 		}
 		for (int i = 0; i < n; i++) {
 			mau[i] = MAUCHU;
@@ -1001,7 +999,7 @@ void ViewschoolyearMenu(Staff* p) {
 	}
 }
 
-void push_enter_view_semester_list(int y, int n,Staff*p) {
+void push_enter_view_schoolyear_list(int y, int n,Staff*p) {
 	if (y == 10 + n - 1) {
 		StaffMenu(p);
 	}
@@ -1021,9 +1019,10 @@ void push_enter_view_semester_list(int y, int n,Staff*p) {
 
 void SchoolYearMenu(string year, Staff* p) {
 	int y = 10;
-	int n = 2;
+	int n = 3;
 	int tt = 0;
-	str thaotac[3] = { "Create Semester","View Semester"};
+	string a = { "[ BACK ]" };
+	string thaotac[3] = { "Create Semester","View Semester","[ BACK ]"};
 
 	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
 	drawBox(45, 10, 30, 2, MAUCHU);
@@ -1044,7 +1043,12 @@ void SchoolYearMenu(string year, Staff* p) {
 		int tmp = tt;
 		int chay = 0;
 		for (int i = 0; i < n; i++) {
-			writeText(50, 11 + chay, thaotac[i], mau[i]);
+			if (thaotac[i] == a) {
+				writeText(55, 20, thaotac[i], mau[i]);
+			}
+			else {
+				writeText(50, 11 + chay, thaotac[i], mau[i]);
+			}
 			chay += 2;
 		}
 
@@ -1080,10 +1084,13 @@ void SchoolYearMenu(string year, Staff* p) {
 		case ENTER:
 			system("cls");
 			if (y == 10) {
-				CreateSemesterMenu(p);
+				CreateSemesterMenu_1(p);
+			}
+			else if(y==11){
+				ViewSemesterMenu(p);
 			}
 			else {
-				ViewSemesterMenu(p);
+				ViewschoolyearMenu(p);
 			}
 		}
 		for (int i = 0; i < n; i++) {
@@ -1563,16 +1570,53 @@ void Edit_SocialID_Menu(Staff* p) {
 	}
 }
 
-void CreateSemesterMenu(Staff* p) {
+Semester* cre_s(int n) {
+	Semester* p = new Semester;
+	p->Season = n;
+	p->pNext = NULL;
+	cout << "good" << endl;
+	return p;
+}
+
+Semester* init_s() {
+	Semester* p = NULL;
+	return p;
+}
+
+int count_semester(Semester* p) {
+	Semester* tmp = p;
+	int count = 0;
+	if (p == NULL) return count;
+	while (tmp != NULL) {
+		count++;
+		tmp = tmp->pNext;
+	}
+	return count;
+}
+
+
+void AddSemester1(SchoolYear* p, Semester* q) {
+	if (p->pHead == NULL) {
+		p->pHead = q;
+	}
+	else {
+		Semester* tmp = p->pHead;
+		while (tmp->pNext != NULL) tmp = tmp->pNext;
+		tmp->pNext = q;
+	}
+}
+
+
+void CreateSemesterMenu_1(Staff* p) {
 	int y = 10;
 	int n = 2;
 	int tt = 0;
-	string a = { "[ CREATE ]" };
+	string a = { "[ NEXT ]" };
 	string b = { "[ BACK ]" };
-	string c = { "Spring" };
-	string d = { "Summer" };
-	string e = { "Fall" };
-	str thaotac[2] = { "[ CREATE ]","[ BACK ]" };
+	string c = { "Semester 1" };
+	string d = { "Semester 2" };
+	string e = { "Semester 3" };
+	str thaotac[2] = { "[ NEXT ]","[ BACK ]" };
 
 	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
 	drawBox(45, 10, 30, 2, MAUCHU);
@@ -1581,15 +1625,15 @@ void CreateSemesterMenu(Staff* p) {
 
 
 	gotoxy(45, 19);
-	cout << "[ CREATE ]";
+	cout << "[ NEXT ]";
 	gotoxy(68, 19);
 	cout << "[ BACK ]";
 	gotoxy(47, 11);
-	cout << "Semester Spring :";
+	cout << "Semester 1: ";
 	gotoxy(47, 13);
-	cout << "Semester Summer :";
+	cout << "Semester 2: ";
 	gotoxy(47, 15);
-	cout << "Semester Fall :";
+	cout << "Semester 3: ";
 
 	gotoxy(44, 22);
 	cout << "Use number ";
@@ -1598,9 +1642,9 @@ void CreateSemesterMenu(Staff* p) {
 	textColor(7);
 	cout << " to create ";
 	gotoxy(44, 23);
-	cout << "Example: Semester Spring: 1, ";
+	cout << "Example: Semester 1: 1, ";	
 	gotoxy(44, 24);
-	cout << "Semester Summer: 0, Semester Fall: 1";
+	cout << "Semester 2: 0, Semester 3: 1";
 	int* mau = new int[n];
 	writeText(central(WConsole, "CREATE SEMESTER"), 7, "CREATE SEMESTER", MAUCHU);
 	for (int i = 0; i < n; i++) {
@@ -1608,32 +1652,46 @@ void CreateSemesterMenu(Staff* p) {
 	}
 	mau[0] = MAUNEN;
 
+	Semester* point = new Semester;
+
+	p->pSchoolHead->pHead = NULL;
+
 	textColor(MAUNEN);
 	gotoxy(47, 11);
 	int semester;
-	cout << "Semester Spring :";
+	cout << "Semester 1: ";
 	cin >> semester;
+	if (semester == 1) {
+		point = cre_s(1);
+		AddSemester1(p->pSchoolHead, point);
+	}
 	textColor(7);
 	gotoxy(47, 11);
-	cout << "Semester Spring :" << semester;
+	cout << "Semester 1: " << semester;
 
 	textColor(MAUNEN);
 	gotoxy(47, 13);
-	//int semester;
-	cout << "Semester Summer :";
+	cout << "Semester 2: ";
 	cin >> semester;
+	if (semester == 1) {
+		point = cre_s(2);
+		AddSemester1(p->pSchoolHead, point);
+	}
 	textColor(7);
 	gotoxy(47, 13);
-	cout << "Semester Summer :" << semester;
+	cout << "Semester 2: " << semester;
 
 	textColor(MAUNEN);
 	gotoxy(47, 15);
-	//int semester;
-	cout << "Semester Fall :";
+	cout << "Semester 3: ";
 	cin >> semester;
+	if (semester == 1) {
+		point = cre_s(3);
+		AddSemester1(p->pSchoolHead, point);
+	}
 	textColor(7);
 	gotoxy(47, 15);
-	cout << "Semester Fall :" << semester;
+	cout << "Semester 3: " << semester;
 
 	while (1) {
 		ShowCur(false);
@@ -1680,7 +1738,190 @@ void CreateSemesterMenu(Staff* p) {
 		}
 		case ENTER:
 			system("cls");
-			push_cre_sy_menu(y,p);
+			//push_cre_sy_menu(y,p);
+			CreateSemesterMenu_2(p);
+		}
+		for (int i = 0; i < n; i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[tt] = MAUNEN;
+		textColor(MAUNEN);
+	}
+}
+
+void CreateSemesterMenu_2(Staff* p) {
+	int y = 10;
+	int n = 2;
+	int tt = 0;
+	string a = { "[ CREATE ]" };
+	string b = { "[ BACK ]" };
+	string c = { "Semester 1" };
+	string d = { "Semester 2" };
+	string e = { "Semester 3" };
+	str thaotac[2] = { "[ CREATE ]","[ BACK ]" };
+	
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+
+
+	int* mau = new int[n];
+	writeText(central(WConsole, "CREATE SEMESTER " + p->pSchoolHead->Year), 7, "CREATE SEMESTER " + p->pSchoolHead->Year, MAUCHU);
+	for (int i = 0; i < n; i++) {
+		mau[i] = MAUCHU;
+	}
+	mau[0] = MAUNEN;
+
+
+
+
+	gotoxy(45, 22);
+	cout << "[ CREATE ]";
+	gotoxy(68, 22);
+	cout << "[ BACK ]";
+	
+	int count = count_semester(p->pSchoolHead->pHead);
+	int chay = 0;
+	Semester* point = p->pSchoolHead->pHead;
+	for (Semester* q = p->pSchoolHead->pHead; q != NULL; q = q->pNext) {
+		if (q->Season == 1) {
+			gotoxy(45, 9 + chay);
+			cout << "Semester 1";
+			gotoxy(45, 10 + chay);
+			cout << "Start Day: ";
+			gotoxy(45, 11 + chay);
+			cout << "End day: ";
+		}
+		if (q->Season == 2) {
+			gotoxy(45, 9 + chay);
+			cout << "Semester 2";
+			gotoxy(45, 10 + chay);
+			cout << "Start Day: ";
+			gotoxy(45, 11 + chay);
+			cout << "End day: ";
+		}
+		if (q->Season == 3) {
+			gotoxy(45, 9 + chay);
+			cout << "Semester 3";
+			gotoxy(45, 10 + chay);
+			cout << "Start Day: ";
+			gotoxy(45, 11 + chay);
+			cout << "End day: ";
+		}
+		chay += 4;
+	}
+
+	chay = 0;
+
+	for (Semester* q = p->pSchoolHead->pHead; q != NULL; q = q->pNext) {
+		if (q->Season == 1) {
+			gotoxy(45, 9 + chay);
+			cout << "Semester 1";
+			gotoxy(45, 10 + chay);
+			textColor(MAUNEN);
+			cout << "Start Day: ";
+			cin >> p->pSchoolHead->pHead->StartDay;
+			textColor(7);
+			gotoxy(45, 10 + chay);
+			cout << "Start Day: " << p->pSchoolHead->pHead->StartDay;
+
+			textColor(MAUNEN);
+			gotoxy(45, 11 + chay);
+			cout << "End Day: ";
+			cin >> p->pSchoolHead->pHead->EndDay;
+			textColor(7);
+			gotoxy(45, 11 + chay);
+			cout << "End Day: " << p->pSchoolHead->pHead->EndDay;
+		}
+		if (q->Season == 2) {
+			gotoxy(45, 9 + chay);
+			cout << "Semester 2";
+			gotoxy(45, 10 + chay);
+			textColor(MAUNEN);
+			cout << "Start Day: ";
+			cin >> p->pSchoolHead->pHead->StartDay;
+			textColor(7);
+			gotoxy(45, 10 + chay);
+			cout << "Start Day: " << p->pSchoolHead->pHead->StartDay;
+
+			textColor(MAUNEN);
+			gotoxy(45, 11 + chay);
+			cout << "End Day: ";
+			cin >> p->pSchoolHead->pHead->EndDay;
+			textColor(7);
+			gotoxy(45, 11 + chay);
+			cout << "End Day: " << p->pSchoolHead->pHead->EndDay;
+		}
+		if (q->Season == 3) {
+			gotoxy(45, 9 + chay);
+			cout << "Semester 3";
+			gotoxy(45, 10 + chay);
+			textColor(MAUNEN);
+			cout << "Start Day: ";
+			cin >> p->pSchoolHead->pHead->StartDay;
+			textColor(7);
+			gotoxy(45, 10 + chay);
+			cout << "Start Day: " << p->pSchoolHead->pHead->StartDay;
+
+			textColor(MAUNEN);
+			gotoxy(45, 11 + chay);
+			cout << "End Day: ";
+			cin >> p->pSchoolHead->pHead->EndDay;
+			textColor(7);
+			gotoxy(45, 11 + chay);
+			cout << "End Day: " << p->pSchoolHead->pHead->EndDay;
+		}
+		chay += 4;
+		p->pSchoolHead->pHead = p->pSchoolHead->pHead->pNext;
+	}
+
+	p->pSchoolHead->pHead = point;
+	
+	while (1) {
+		ShowCur(false);
+		deleteScreen();
+		textColor(MAUNEN);
+		int tmp = tt;
+		for (int i = 0; i < n; i++) {
+			if (thaotac[i] == a) {
+				writeText(45, 22, thaotac[i], mau[i]);
+			}
+			if (thaotac[i] == b) {
+				writeText(68, 22, thaotac[i], mau[i]);
+			}
+		}
+
+		int z = _getch();
+		TRANGTHAI trangthai = key(z);
+		switch (trangthai) {
+		case LEFT:
+		{
+			if (tt == 0)
+			{
+				y = 11;
+				tt = n - 1;
+			}
+			else {
+				tt--;
+				y--;
+			}
+			break;
+
+		}
+		case RIGHT:
+		{
+			if (tt == n - 1) {
+				tt = 0;
+				y = 10;
+			}
+			else {
+				tt++;
+				y++;
+			}
+			break;
+		}
+		case ENTER:
+			system("cls");
+			//push_cre_sy_menu(y,p);
+			SchoolYearMenu(p->pSchoolHead->Year, p);
 		}
 		for (int i = 0; i < n; i++) {
 			mau[i] = MAUCHU;
@@ -1691,42 +1932,158 @@ void CreateSemesterMenu(Staff* p) {
 }
 
 void ViewSemesterMenu(Staff* p) {
-	int y = 10;
-	int n = 3;
-	int tt = 0;
-	string a = { "Semester Spring" };
-	string b = { "Semester Summer" };
-	string c = { "Semester Fall" };
-	
-	str thaotac[3] = { "Semester Spring","Semester Summer" ,"Semester Fall" };
 
-	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
-	drawBox(45, 10, 30, 2, MAUCHU);
-	drawBox(45, 12, 30, 2, MAUCHU);
-	drawBox(45, 14, 30, 2, MAUCHU);
 	
+	int nu = count_semester(p->pSchoolHead->pHead);
+	
+	if (nu == 0) {
+		int y = 10;
+		int n = 2;
+		int tt = 0;
+		string a = { "[ CREATE SEMESTER ]" };
+		string b = { "[ BACK ]" };
+		str thaotac[2] = { "[ CREATE SEMESTER ]","[ BACK ]" };
+
+		drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+
+		int* mau = new int[n];
+		writeText(central(WConsole, "SEMESTER - " + p->pSchoolHead->Year), 7, "SEMESTER - " + p->pSchoolHead->Year, MAUCHU);
+		for (int i = 0; i < n; i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[0] = MAUNEN;
+		gotoxy(45, 10);
+		cout << "Semester is empty.............";
+		while (1) {
+			ShowCur(false);
+			deleteScreen();
+			textColor(MAUNEN);
+			int tmp = tt;
+			for (int i = 0; i < n; i++) {
+				if (thaotac[i] == a) {
+					writeText(50, 12, thaotac[i], mau[i]);
+				}
+				if (thaotac[i] == b) {
+					writeText(56, 14, thaotac[i], mau[i]);
+				}
+			}
+
+			int z = _getch();
+			TRANGTHAI trangthai = key(z);
+			switch (trangthai) {
+			case UP:
+			{
+				if (tt == 0)
+				{
+					y = 11;
+					tt = n - 1;
+				}
+				else {
+					tt--;
+					y--;
+				}
+				break;
+
+			}
+			case DOWN:
+			{
+				if (tt == n - 1) {
+					tt = 0;
+					y = 10;
+				}
+				else {
+					tt++;
+					y++;
+				}
+				break;
+			}
+			case ENTER:
+				system("cls");
+				if (y == 10) {
+					CreateSemesterMenu_1(p);
+				}
+				else {
+					ViewschoolyearMenu(p);
+				}
+			}
+			for (int i = 0; i < n; i++) {
+				mau[i] = MAUCHU;
+			}
+			mau[tt] = MAUNEN;
+			textColor(MAUNEN);
+		}
+	}
+
+	
+	int y = 10;
+	int tt = 0;
+	int n = count_semester(p->pSchoolHead->pHead) + 1;
+	string* thaotac = new string[n];
+	int i = 0;
+	thaotac[n - 1] = { "[ BACK ]" };	
+	int chay = 0;
+
+	Semester* point = p->pSchoolHead->pHead;
+	
+	for (Semester* q = p->pSchoolHead->pHead ;  q != NULL;  q = q->pNext) {
+		if (q->Season == 1) {
+			thaotac[i] = { "Semester 1" };
+			gotoxy(45, 9 + chay);
+			cout << "Semester 1";
+			gotoxy(45, 10 + chay);
+			cout << "Start Day: " << p->pSchoolHead->pHead->StartDay;
+			gotoxy(45, 11 + chay);
+			cout << "End day: " << p->pSchoolHead->pHead->EndDay;
+		}
+		if (q->Season == 2) {
+			thaotac[i] = { "Semester 2" };
+			gotoxy(45, 9 + chay);
+			cout << "Semester 2";
+			gotoxy(45, 10 + chay);
+			cout << "Start Day: " << p->pSchoolHead->pHead->StartDay;
+			gotoxy(45, 11 + chay);
+			cout << "End day: " << p->pSchoolHead->pHead->EndDay;
+		}
+		if (q->Season == 3) {
+			thaotac[i] = { "Semester 3" };
+			gotoxy(45, 9 + chay);
+			cout << "Semester 3";
+			gotoxy(45, 10 + chay);
+			cout << "Start Day: " << p->pSchoolHead->pHead->StartDay;
+			gotoxy(45, 11 + chay);
+			cout << "End day: " << p->pSchoolHead->pHead->EndDay;
+		}
+		chay += 4;
+		i++;
+		p->pSchoolHead->pHead=p->pSchoolHead->pHead->pNext;
+	}
+	p->pSchoolHead->pHead = point;
+	
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);	
+	
+
 	int* mau = new int[n];
-	writeText(central(WConsole, "SEMESTER"), 7, "SEMESTER", MAUCHU);
+	writeText(central(WConsole, "SEMESTER - " + p->pSchoolHead->Year), 7, "SEMESTER - " + p->pSchoolHead->Year, MAUCHU);
 	for (int i = 0; i < n; i++) {
 		mau[i] = MAUCHU;
 	}
 	mau[0] = MAUNEN;
+
 
 	while (1) {
 		ShowCur(false);
 		deleteScreen();
 		textColor(MAUNEN);
 		int tmp = tt;
+		chay = 0;
 		for (int i = 0; i < n; i++) {
-			if (thaotac[i] == a) {
-				writeText(50, 11, thaotac[i], mau[i]);
+			if (thaotac[i] == "[ BACK ]") {
+				writeText(55, 21, thaotac[i], mau[i]);
 			}
-			if (thaotac[i] == b) {
-				writeText(50, 13, thaotac[i], mau[i]);
+			else{
+				writeText(45, 9 + chay , thaotac[i], mau[i]);
 			}
-			if (thaotac[i] == c) {
-				writeText(50, 15, thaotac[i], mau[i]);
-			}
+			chay += 4;
 		}
 
 		int z = _getch();
@@ -1736,7 +2093,7 @@ void ViewSemesterMenu(Staff* p) {
 		{
 			if (tt == 0)
 			{
-				y = 12;
+				y = 10 + n - 1;
 				tt = n - 1;
 			}
 			else {
@@ -1760,7 +2117,7 @@ void ViewSemesterMenu(Staff* p) {
 		}
 		case ENTER:
 			system("cls");
-			push_enter_view_semester_list(y,p);
+			push_enter_view_semester_list(y,n,p);
 		}
 		for (int i = 0; i < n; i++) {
 			mau[i] = MAUCHU;
@@ -1770,7 +2127,48 @@ void ViewSemesterMenu(Staff* p) {
 	}
 }
 
-void push_enter_view_semester_list(int y, Staff* p) {
+
+
+void push_enter_view_semester_list(int y, int n, Staff* p) {
+	if (y == 10 + n - 1) {
+		SchoolYearMenu(p->pSchoolHead->Year, p);
+	}
+	else {
+		string* thaotac = new string[5];
+		int i = 0;
+		thaotac[n - 2] = { "[ BACK ]" };
+		int chay = 0;
+		Semester* point = p->pSchoolHead->pHead;
+		for (Semester* q = p->pSchoolHead->pHead; q != NULL; q = q->pNext) {
+			if (q->Season == 1) {
+				thaotac[i] = { "Semester 1" };
+			}
+			if (q->Season == 2) {
+				thaotac[i] = { "Semester 2" };
+			}
+			if (q->Season == 3) {
+				thaotac[i] = { "Semester 3" };
+			}
+			chay += 4;
+			i++;
+			p->pSchoolHead->pHead = p->pSchoolHead->pHead->pNext;
+		}
+		p->pSchoolHead->pHead = point;
+		int var = y - 10;
+		CourseMenu(thaotac[var], p);
+	}
+}
+
+void CourseMenu(string a,Staff* p) {
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+
+	writeText(central(WConsole, a), 7, a, MAUCHU);
+}
+
+
+
+
+void push_enter_view_semester_list_2(int y, Staff* p) {
 	switch (y) {
 	case 10:
 		SpringMenu(p);

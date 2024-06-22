@@ -25,7 +25,8 @@ void MainMenu(Staff* p);
 			void CreateSchoolYearMenu(Staff* p);
 			void ViewschoolyearMenu(Staff* p);
 				void SchoolYearMenu(string year,Staff* p);
-					void CreateSemesterMenu(Staff* p);
+					void CreateSemesterMenu_1(Staff* p);
+					void CreateSemesterMenu_2(Staff* p);
 					void ViewSemesterMenu(Staff* p);
 						void SpringMenu(Staff* p);
 							void CreateCourseMenu(Staff* p);
@@ -46,25 +47,27 @@ void MainMenu(Staff* p);
 	void AboutusMenu(Staff* p);
 	void HelpMenu(Staff* p);
 
+	void CourseMenu(string a, Staff* p);
 
 
 
+	void push_enter_main_menu(int y, Staff* p);
 
-void push_enter_main_menu(int y, Staff* p);
+	void push_enter_menu_login_2(int y, Staff* p);
 
-void push_enter_menu_login_2(int y, Staff* p);
+	void push_enter_student_menu(int y, Staff* p);
 
-void push_enter_student_menu(int y, Staff* p);
+	void push_enter_staff_menu(int y, Staff* p);
 
-void push_enter_staff_menu(int y, Staff* p);
+	void push_cre_sy_menu(int y, Staff* p);
 
-void push_cre_sy_menu(int y, Staff* p);
+	void push_enter_view_semester_list_2(int y, Staff* p);
+	void push_enter_view_semester_list(int y, int n, Staff* p);
 
-void push_enter_view_semester_list(int y, Staff* p);
 
-void push_enter_season_menu(int y, Staff* p);
+	void push_enter_season_menu(int y, Staff* p);
 
-void push_enter_view_course_list(int y, Staff* p);
+	void push_enter_view_course_list(int y, Staff* p);
 
 
 void push_enter_editinfo_menu(int y, Staff* p);
@@ -81,15 +84,23 @@ void Edit_DateOfBirth_Menu(Staff* p);
 
 void Edit_SocialID_Menu(Staff* p);
 
-int count_shoolyear(SchoolYear* p);
+
+
+
 
 SchoolYear* cre(string a);
 SchoolYear* init_sy();
+int count_shoolyear(SchoolYear* p);
 void add_year(Staff* p, SchoolYear* tmp);
 
-void push_enter_view_semester_list(int y, int n, Staff* p);
+void push_enter_view_schoolyear_list(int y, int n, Staff* p);
 
 
+
+Semester* cre_s(int n);
+Semester* init_s();
+int count_semester(Semester* p);
+void AddSemester1(SchoolYear* p, Semester* q);
 
 
 

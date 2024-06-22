@@ -167,7 +167,15 @@ void AscendingStudentInClass(Student*& pHead);
 
 int CountSchoolYearNode(Staff* p);
 
-Staff* LoginStaff(School c);
+Staff* LoginStaff(School c, string a, string b);
 
 string getPassword();
+
+bool checkSchoolYear(Staff *s,string a);
+
+Student* LoginStudent(School c, string a, string b);
+
+int CountNodeSchoolYear(Staff* p);
+
+SchoolYear* getSchoolYearByNum(Staff* p,int a);
 #endif

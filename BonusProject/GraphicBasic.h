@@ -50,6 +50,9 @@ void drawBox(int x, int y, int w, int h, int t_color);
 //11. Canh giua
 int central(int w, string a);
 
+//12.Ke bang
+void drawTable(int x, int y, int w, int h,int row, int t_color);
+
 
 
 #endif
