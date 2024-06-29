@@ -27,18 +27,18 @@ void MainMenu(Staff* p);
 				void SchoolYearMenu(string year,Staff* p);
 					void CreateSemesterMenu_1(Staff* p);
 					void CreateSemesterMenu_2(Staff* p);
-					void ViewSemesterMenu(Staff* p);
-						void SpringMenu(Staff* p);
-							void CreateCourseMenu(Staff* p);
-							void ViewCourseMenu(Staff* p);
+					void ViewSemesterMenu(Staff* p);//1938
+						void CourseMenu(string a,int n,  Staff* p);
+							void CreateCourseMenu(string semester,int n, Staff* p);
+							void ViewCourseMenu(string semester,int num, Staff* p);
 								void Course_1_Menu(Staff* p);
-						void SummerMenu(Staff* p);
-							void CreateCourseMenu(Staff* p);
-							void ViewCourseMenu(Staff* p);
+						void CourseMenu(string a,int n, Staff* p);
+							void CreateCourseMenu(string semester,int n, Staff* p);
+							void ViewCourseMenu(string semester, int num, Staff* p);
 								void Course_1_Menu(Staff* p);
-						void FallMenu(Staff* p);
-							void CreateCourseMenu(Staff* p);
-							void ViewCourseMenu(Staff* p);
+						void CourseMenu(string a,int n, Staff* p);
+							void CreateCourseMenu(string semester, int n,Staff* p);
+							void ViewCourseMenu(string semester,int num, Staff* p);
 								void Course_1_Menu(Staff* p);
 			void Info_Menu(Staff* p);
 				void EditinfoMenu(Staff* p);
@@ -47,7 +47,8 @@ void MainMenu(Staff* p);
 	void AboutusMenu(Staff* p);
 	void HelpMenu(Staff* p);
 
-	void CourseMenu(string a, Staff* p);
+	
+
 
 
 
@@ -61,13 +62,13 @@ void MainMenu(Staff* p);
 
 	void push_cre_sy_menu(int y, Staff* p);
 
-	void push_enter_view_semester_list_2(int y, Staff* p);
+
 	void push_enter_view_semester_list(int y, int n, Staff* p);
 
 
-	void push_enter_season_menu(int y, Staff* p);
+	void push_enter_season_menu(string semester ,int n, int y, Staff* p);
 
-	void push_enter_view_course_list(int y, Staff* p);
+	void push_enter_view_course_list(string q, int num,int y, Staff* p);
 
 
 void push_enter_editinfo_menu(int y, Staff* p);
@@ -101,6 +102,33 @@ Semester* cre_s(int n);
 Semester* init_s();
 int count_semester(Semester* p);
 void AddSemester1(SchoolYear* p, Semester* q);
+
+
+
+
+void addcourse(Semester* p, Course* q);
+
+void DeleteCourseMenu(Staff* p);
+void AddCourseMenu(Staff* p);
+
+
+void CourseMenuInside(string q, int num, Staff* p); // 2606
+
+
+void DeleteCourseMenu(Staff* p);
+void AddCourseMenu(Staff* p);
+
+
+
+void ViewClassMenu(Staff* p); // 2716
+
+void push_enter_view_class_menu(int y, Class* tmp, Staff* p);
+
+void edit_class(Staff* p);
+
+int count_student(Class* p);
+
+void inside_class(Class* q, Staff* p);
 
 
 

@@ -1,0 +1,91 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\source\\newpro\\BonusProject-CSC10002\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{E6974498-300D-45A1-8333-04F7BC6EFD58}|BonusProject\\BonusProject.vcxproj|C:\\Users\\ADMIN\\source\\newpro\\BonusProject-CSC10002\\BonusProject\\BasicMenu.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E6974498-300D-45A1-8333-04F7BC6EFD58}|BonusProject\\BonusProject.vcxproj|solutionrelative:BonusProject\\BasicMenu.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6974498-300D-45A1-8333-04F7BC6EFD58}|BonusProject\\BonusProject.vcxproj|C:\\Users\\ADMIN\\source\\newpro\\BonusProject-CSC10002\\BonusProject\\Struct.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E6974498-300D-45A1-8333-04F7BC6EFD58}|BonusProject\\BonusProject.vcxproj|solutionrelative:BonusProject\\Struct.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6974498-300D-45A1-8333-04F7BC6EFD58}|BonusProject\\BonusProject.vcxproj|C:\\Users\\ADMIN\\source\\newpro\\BonusProject-CSC10002\\BonusProject\\BasicMenu.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E6974498-300D-45A1-8333-04F7BC6EFD58}|BonusProject\\BonusProject.vcxproj|solutionrelative:BonusProject\\BasicMenu.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E6974498-300D-45A1-8333-04F7BC6EFD58}|BonusProject\\BonusProject.vcxproj|C:\\Users\\ADMIN\\source\\newpro\\BonusProject-CSC10002\\BonusProject\\Struct.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E6974498-300D-45A1-8333-04F7BC6EFD58}|BonusProject\\BonusProject.vcxproj|solutionrelative:BonusProject\\Struct.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Struct.cpp",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\newpro\\BonusProject-CSC10002\\BonusProject\\Struct.cpp",
+              "RelativeDocumentMoniker": "BonusProject\\Struct.cpp",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\newpro\\BonusProject-CSC10002\\BonusProject\\Struct.cpp",
+              "RelativeToolTip": "BonusProject\\Struct.cpp",
+              "ViewState": "AQIAADwAAAAAAAAAAAAAAEoAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-24T02:36:42.741Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BasicMenu.h",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\newpro\\BonusProject-CSC10002\\BonusProject\\BasicMenu.h",
+              "RelativeDocumentMoniker": "BonusProject\\BasicMenu.h",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\newpro\\BonusProject-CSC10002\\BonusProject\\BasicMenu.h",
+              "RelativeToolTip": "BonusProject\\BasicMenu.h",
+              "ViewState": "AQIAAG8AAAAAAAAAAAAwwHwAAAA9AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-22T15:33:41.118Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BasicMenu.cpp",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\newpro\\BonusProject-CSC10002\\BonusProject\\BasicMenu.cpp",
+              "RelativeDocumentMoniker": "BonusProject\\BasicMenu.cpp",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\newpro\\BonusProject-CSC10002\\BonusProject\\BasicMenu.cpp",
+              "RelativeToolTip": "BonusProject\\BasicMenu.cpp",
+              "ViewState": "AQIAALQLAAAAAAAAAAAkwMMLAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-22T15:33:37.118Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Struct.h",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\newpro\\BonusProject-CSC10002\\BonusProject\\Struct.h",
+              "RelativeDocumentMoniker": "BonusProject\\Struct.h",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\newpro\\BonusProject-CSC10002\\BonusProject\\Struct.h",
+              "RelativeToolTip": "BonusProject\\Struct.h",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAACwAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-22T15:33:29.789Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
