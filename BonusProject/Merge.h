@@ -38,9 +38,24 @@ void MainMenu_s();
 						void SemesterMenu_s(Staff*& p, SchoolYear*& q, Semester*& r);
 							void CreateCourseMenu_s(Staff*& p, SchoolYear*& q, Semester*& r);
 							void ViewCourseMenu_s(Staff*& p, SchoolYear*& q, Semester*& r);
-		void StudentMenu_s(Student *&p);//3.2
-			void InfoMenu_s(Student* &p);//3.2.1
-
+								void CourseMenu_s(Staff*& p, SchoolYear*& q, Semester*& r, Course*& s);
+									void AddStudentMenu_s(Staff* p, SchoolYear*& q, Semester*& r, Course*& s);
+										void AddOneStudent_s(Staff*& p, SchoolYear*& q, Semester*& r, Course*& s);
+										void AddCSVStudent_s(Staff*& p, SchoolYear*& q, Semester*& r, Course*& s);
+									void ViewStudentMenu_s(Staff*& p, SchoolYear*& q, Semester*& r, Course*& s);
+									void ScoreBoardMenu_s(Staff*& p, SchoolYear*& q, Semester*& r, Course*& s);
+										void ImportScoreBoard_s(Staff*& p, SchoolYear*& q, Semester*& r, Course*& s);
+										void ExportScoreBoard_s(Staff*& p, SchoolYear*& q, Semester*& r, Course*& s);
+		void StudentMenu_s(Student *&p,School&s);//3.2
+			void InfoMenu_s(Student*& p, School& S);//3.2.1
+				void EditInfoMenu_s(Student*& p, School& S);//3.1.2.1
+					void Edit_ID_Menu_s(Student*& p, School& S);//3.1.2.1.1
+					void Edit_Firstname_Menu_s(Student*& p, School& S);//3.1.2.1.2
+					void Edit_Lastname_Menu_s(Student*& p, School& S);//3.1.2.1.3
+					void Edit_Gender_Menu_s(Student*& p, School& S);	//3.1.2.1.4
+					void Edit_DateOfBirth_Menu_s(Student*& p, School& S);	//3.1.2.1.5
+					void Edit_SocialID_Menu_s(Student*& p, School& S);//3.1.2.1.6
+					void ScoreBoardMenu_s(Student*& p, School& S);
 
 			
 

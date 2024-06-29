@@ -19,7 +19,7 @@ struct InforPerSon {
 	int Gender;
 	string DateOfBirth;//dd/mm/yyyy
 	string SocialID;
-	string dTB;
+	string dTB="-";
 };
 
 struct Student{
@@ -195,4 +195,10 @@ Student* getStudentByNum(Course* p, int a);
 int CountNodeStudent(Class* p);
 
 Student* getStudentByNum(Class* p, int a);
+
+bool ReadCSVStudentForCourse_s(char p[], Course*& c);
+
+bool ReadScoreBorad(char p[], Course*& c);
+
+bool WriteScoreBoard(char p[], Course*& c);
 #endif

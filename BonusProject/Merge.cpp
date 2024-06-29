@@ -229,7 +229,7 @@ void LoginMenu_s(School &S) {
 				}
 				else {
 					clrscr();
-					StudentMenu_s(p);
+					StudentMenu_s(p,S);
 				}
 			}
 		}
@@ -563,9 +563,9 @@ void AddSchoolYearMenu_s(Staff* &p) {
 	}
 }
 
-void StudentMenu_s(Student *&p) {
-	int n = 5;
-	str thaotac[5] = { "Infomation","Course", "Class","Score","[LOG OUT]" };
+void StudentMenu_s(Student *&p,School &s) {
+	int n = 3;
+	str thaotac[4] = { "Infomation", "Score Board","LOG OUT" };
 	int tt = 0;
 	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
 	int* mau = new int[n];
@@ -579,16 +579,13 @@ void StudentMenu_s(Student *&p) {
 		deleteScreen();
 		textColor(MAUNEN);
 		int tmp = tt;
-		if (tt != n - 1) {
-			gotoxy(LeftBox - 2, Upbox + Line + tt);
-			cout << char(175);
-			gotoxy(RightBox + 2, Upbox + Line + tt);
-			cout << char(174);
-		}
-		for (int i = 0; i < n-1; i++) {
+		gotoxy(LeftBox - 2, Upbox + Line + tt);
+		cout << char(175);
+		gotoxy(RightBox + 2, Upbox + Line + tt);
+		cout << char(174);
+		for (int i = 0; i < n; i++) {
 			writeText(LeftBox, Upbox + Line + i, thaotac[i], mau[i]);
 		}
-		writeText(Xexit - 2, Yexit, thaotac[4], mau[4]);
 		int z = _getch();
 		TRANGTHAI trangthai = key(z);
 		switch (trangthai) {
@@ -602,7 +599,7 @@ void StudentMenu_s(Student *&p) {
 				tt--;
 			}
 			break;
-
+			
 		}
 		case DOWN:
 		{
@@ -617,11 +614,15 @@ void StudentMenu_s(Student *&p) {
 		case ENTER:
 			if (tt == 0) {
 				system("cls");
-				InfoMenu_s(p);
+				InfoMenu_s(p,s);
 			}
-			else if (tt == 4) {
+			else if (tt == 2) {
 				system("cls");
 				MainMenu_s();
+			}
+			else if (tt == 1) {
+				clrscr();
+				ScoreBoardMenu_s(p, s);
 			}
 		}
 		for (int i = 0; i < n; i++) {
@@ -637,7 +638,7 @@ void StudentMenu_s(Student *&p) {
 	}
 }
 
-void InfoMenu_s(Student* &p) {
+void InfoMenu_s(Student* &p,School&S) {
 	string a = { "[BACK]" };
 	string b = { "[EDIT]" };
 	int n = 2;
@@ -711,7 +712,11 @@ void InfoMenu_s(Student* &p) {
 		case ENTER:
 			if (tt == 0) {
 				system("cls");
-				StudentMenu_s(p);
+				StudentMenu_s(p,S);
+			}
+			else if (tt == 1) {
+				clrscr();
+				EditInfoMenu_s(p, S);
 			}
 		}
 		for (int i = 0; i < n; i++) {
@@ -889,7 +894,7 @@ void ViewschoolyearList_s(Staff* &p) {
 	}
 }
 
-void EditInfoMenu_s(Staff* &p) {
+void EditInfoMenu_s(Student*& p, School& S) {
 	string a = { "[BACK]" };
 	int n = 7;
 	string thaotac[7] = { "ID","FirstName", "LastName","Gender", "DateOfBirth","SocialID","[BACK]" };
@@ -949,31 +954,31 @@ void EditInfoMenu_s(Staff* &p) {
 		case ENTER:
 			if (tt == 6) {
 				clrscr();
-				InfoMenu_s(p);
+				InfoMenu_s(p,S);
 			}
 			else if (tt == 0) {
 				clrscr();
-				Edit_ID_Menu_s(p);
+				Edit_ID_Menu_s(p,S);
 			}
 			else if (tt == 1) {
 				clrscr();
-				Edit_Firstname_Menu_s(p);
+				Edit_Firstname_Menu_s(p,S);
 			}
 			else if (tt == 2) {
 				clrscr();
-				Edit_Lastname_Menu_s(p);
+				Edit_Lastname_Menu_s(p,S);
 			}
 			else if (tt == 3) {
 				clrscr();
-				Edit_Gender_Menu_s(p);
+				Edit_Gender_Menu_s(p,S);
 			}
 			else if (tt == 4) {
 				clrscr();
-				Edit_DateOfBirth_Menu_s(p);
+				Edit_DateOfBirth_Menu_s(p,S);
 			}
 			else if (tt == 5) {
 				clrscr();
-				Edit_SocialID_Menu_s(p);
+				Edit_SocialID_Menu_s(p,S);
 			}
 		}
 		for (int i = 0; i < n; i++) {
@@ -988,7 +993,7 @@ void EditInfoMenu_s(Staff* &p) {
 	}
 }
 
-void Edit_ID_Menu_s(Staff* &p) {
+void Edit_ID_Menu_s(Student*& p, School& S) {
 	string a = { "[SAVE]" };
 	string b = { "ID: " };
 	int n = 1;
@@ -1025,7 +1030,7 @@ void Edit_ID_Menu_s(Staff* &p) {
 		switch (trangthai) {
 		case ENTER:
 			system("cls");
-			EditInfoMenu_s(p);
+			EditInfoMenu_s(p,S);
 		}
 		for (int i = 0; i < n; i++) {
 			mau[i] = MAUCHU;
@@ -1035,7 +1040,7 @@ void Edit_ID_Menu_s(Staff* &p) {
 	}
 }
 
-void Edit_Firstname_Menu_s(Staff* &p) {
+void Edit_Firstname_Menu_s(Student*& p, School& S) {
 	string a = { "[SAVE]" };
 	string b = { "Firstname: " };
 	int y = 10;
@@ -1071,7 +1076,7 @@ void Edit_Firstname_Menu_s(Staff* &p) {
 		switch (trangthai) {
 		case ENTER:
 			system("cls");
-			EditInfoMenu_s(p);
+			EditInfoMenu_s(p,S);
 		}
 		for (int i = 0; i < n; i++) {
 			mau[i] = MAUCHU;
@@ -1081,7 +1086,7 @@ void Edit_Firstname_Menu_s(Staff* &p) {
 	}
 }
 
-void Edit_Lastname_Menu_s(Staff*& p) {
+void Edit_Lastname_Menu_s(Student*& p, School& S) {
 	string a = { "[SAVE]" };
 	string b = { "Lastname: " };
 	int y = 10;
@@ -1117,7 +1122,7 @@ void Edit_Lastname_Menu_s(Staff*& p) {
 		switch (trangthai) {
 		case ENTER:
 			system("cls");
-			EditInfoMenu_s(p);
+			EditInfoMenu_s(p,S);
 		}
 		for (int i = 0; i < n; i++) {
 			mau[i] = MAUCHU;
@@ -1127,7 +1132,7 @@ void Edit_Lastname_Menu_s(Staff*& p) {
 	}
 }
 
-void Edit_Gender_Menu_s(Staff* &p) {
+void Edit_Gender_Menu_s(Student*& p, School& S) {
 	string a = "Gender: ";
 	string c = "[FEMALE]";
 	string b = "[MALE]";
@@ -1178,12 +1183,12 @@ void Edit_Gender_Menu_s(Staff* &p) {
 			if (tt == 0) {
 				p->Info.Gender = 1;
 				clrscr();
-				EditInfoMenu_s(p);
+				EditInfoMenu_s(p,S);
 			}
 			else if (tt == 1) {
 				p->Info.Gender = 0;
 				clrscr();
-				EditInfoMenu_s(p);
+				EditInfoMenu_s(p,S);
 			}
 		}
 		}
@@ -1195,7 +1200,7 @@ void Edit_Gender_Menu_s(Staff* &p) {
 	}
 }
 
-void Edit_DateOfBirth_Menu_s(Staff* &p) {
+void Edit_DateOfBirth_Menu_s(Student*& p, School& S) {
 	string a = { "[SAVE]" };
 	string b = { "DateOfBirth: " };
 	int y = 10;
@@ -1233,7 +1238,7 @@ void Edit_DateOfBirth_Menu_s(Staff* &p) {
 		switch (trangthai) {
 		case ENTER:
 			system("cls");
-			EditInfoMenu_s(p);
+			EditInfoMenu_s(p,S);
 		}
 		for (int i = 0; i < n; i++) {
 			mau[i] = MAUCHU;
@@ -1243,7 +1248,7 @@ void Edit_DateOfBirth_Menu_s(Staff* &p) {
 	}
 }
 
-void Edit_SocialID_Menu_s(Staff* &p) {
+void Edit_SocialID_Menu_s(Student*& p, School& S) {
 	string a = { "[SAVE]" };
 	string b = { "SocialID: " };
 	int y = 10;
@@ -1281,7 +1286,7 @@ void Edit_SocialID_Menu_s(Staff* &p) {
 		switch (trangthai) {
 		case ENTER:
 			system("cls");
-			EditInfoMenu_s(p);
+			EditInfoMenu_s(p,S);
 		}
 		for (int i = 0; i < n; i++) {
 			mau[i] = MAUCHU;
@@ -1291,3 +1296,55 @@ void Edit_SocialID_Menu_s(Staff* &p) {
 	}
 }
 
+void ScoreBoardMenu_s(Student*& p, School& S) {
+	Semester* k = S.pHead->pSchoolHead->pNext->pNext->pHead;
+	int i = 0;
+	Course* q = k->pHead;
+	while (q != NULL) {
+		Student* q1 = q->pHead;
+		while (q1 != NULL) {
+			if (p->Info.ID.compare(q1->Info.ID) == 0) {
+				writeText(LeftBox - 5, Upbox + Line + i, q->CourseName, 7);
+				writeText(LeftBox + 20, Upbox + Line + i, q1->Info.dTB, 7);
+				i++;
+			}
+			q1 = q1->pNextCourse;
+		}
+		q = q->pNext;
+		
+	}
+	string a = { "[BACK]" };
+
+	int n = 1;
+	str thaotac[1] = { "[BACK]" };
+	
+	int tt = 0;
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+
+	int* mau = new int[n];
+	writeText(central(WConsole, "SCORE BOARD"), 7, "SCORE BOARD", MAUCHU);
+	for (int i = 0; i < n; i++) {
+		mau[i] = MAUCHU;
+	}
+	mau[0] = MAUNEN;
+	while (1) {
+		ShowCur(false);
+		deleteScreen();
+		textColor(MAUNEN);
+		int tmp = tt;
+		writeText(central(WConsole, a), DownBox, a, MAUNEN);
+
+		int z = _getch();
+		TRANGTHAI trangthai = key(z);
+		switch (trangthai) {
+		case ENTER:
+			clrscr();
+			StudentMenu_s(p, S);
+		}
+		for (int i = 0; i < n; i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[tt] = MAUNEN;
+		textColor(MAUNEN);
+	}
+}

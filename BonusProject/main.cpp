@@ -5,7 +5,7 @@
 
 
 int main() {
-	Staff* p = new Staff;
+	/*Staff* p = new Staff;
 	Course* q = new Course;
 	string csv;
 	Semester* s = new Semester;
@@ -18,9 +18,10 @@ int main() {
 	q->Size = 50;
 	q->TeacherName = "Le Van Hop";
 
-	//MainMenu(p);
-	//MainMenu_s();
-	Viewinfocourse(p,s,q,csv);
+	
+	Viewinfocourse(p,s,q,csv);*/
+
+	MainMenu_s();
 	
 
 	

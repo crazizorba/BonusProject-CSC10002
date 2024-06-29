@@ -235,6 +235,7 @@ Class* ReadCSVStudent(const char* p, string name) {
 		getline(fin, q.SocialID, '\n');
 		q.Password = ExtractPassWord(q.SocialID);
 		Student* p = CreateStudent(q);
+		p->Info.dTB = "-";
 		AddStudentInClass(c, p);
 		
 	}
@@ -680,6 +681,7 @@ void ReadCSVStudentForCourse( char* p, Course*& c) {
 		getline(fin, q.SocialID, '\n');
 		q.Password = ExtractPassWord(q.SocialID);
 		Student* p = CreateStudent(q);
+		p->Info.dTB = "-";
 		AddStudentInCourse(c, p);
 
 	}
@@ -973,4 +975,83 @@ Student* getStudentByNum(Class* p, int a) {
 		q = q->pNextClass;
 	}
 	return q;
+}
+
+bool ReadCSVStudentForCourse_s(char p[], Course*& c) {
+	ifstream fin;
+	fin.open(p);
+	if (!fin.is_open()) {
+		return false;
+	}
+	else {
+		string tmp;
+		getline(fin, tmp, '\n');
+		while (!fin.eof()) {
+			InforPerSon q;
+			getline(fin, q.ID, ',');
+			getline(fin, q.LastName, ',');
+			getline(fin, q.FirstName, ',');
+			string tmpG;
+			getline(fin, tmpG, ',');
+			if (tmpG.compare("0") == 0) q.Gender = 0;
+			else q.Gender = 1;
+			getline(fin, q.DateOfBirth, ',');
+			getline(fin, q.SocialID, '\n');
+			q.Password = ExtractPassWord(q.SocialID);
+			Student* p = CreateStudent(q);
+			p->Info.dTB = "-";
+			AddStudentInCourse(c, p);
+		}
+		fin.close();
+		return true;
+	}
+}
+
+bool ReadScoreBorad(char p[], Course*& c) {
+	ifstream fin;
+	fin.open(p);
+	if (!fin.is_open()) {
+		return false;
+	}
+	else {
+		string tmp;
+		getline(fin, tmp, '\n');
+		Student* p = c->pHead;
+		while (p!=NULL) {
+			getline(fin, p->Info.ID, ',');
+			getline(fin, p->Info.LastName, ',');
+			getline(fin, p->Info.FirstName, ',');
+			string tmpG;
+			getline(fin, tmpG, ',');
+			if (tmpG.compare("0") == 0) p->Info.Gender = 0;
+			else p->Info.Gender = 1;
+			getline(fin, p->Info.DateOfBirth, ',');			
+			getline(fin, p->Info.SocialID, ',');
+			getline(fin, p->Info.dTB, '\n');
+
+			p = p->pNextCourse;
+		}
+		fin.close();
+		return true;
+	}
+}
+
+bool WriteScoreBoard(char p[], Course*& c) {
+	ofstream fin;
+	fin.open(p);
+	if (!fin.is_open()) {
+		return false;
+	}
+	else {
+		fin << "Student ID, Last name, First name, Gender, Date of Birth, Social ID,Average Score\n";
+		Student* p = c->pHead;
+		while (p != NULL) {
+			fin << p->Info.ID << "," << p->Info.LastName << "," << p->Info.FirstName << ',' << p->Info.Gender << ",";
+			fin << p->Info.DateOfBirth << "," << p->Info.SocialID << "," << p->Info.dTB<<endl;
+			p = p->pNextCourse;
+		}
+		
+		fin.close();
+		return true;
+	}
 }
