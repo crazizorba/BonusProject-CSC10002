@@ -1924,7 +1924,7 @@ void CreateSemesterMenu_2(Staff* p) {
 		case ENTER:
 			system("cls");
 			//push_cre_sy_menu(y,p);
-			SchoolYearMenu(p->pSchoolHead->Year, p);
+			//SchoolYearMenu(p->pSchoolHead->Year, p);
 		}
 		for (int i = 0; i < n; i++) {
 			mau[i] = MAUCHU;
@@ -2868,9 +2868,6 @@ struct InforPerSon {
 	int tt = 0;
 	int i = 0;
 
-	while (tmp) {
-		
-	}
 
 	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
 
@@ -2942,25 +2939,47 @@ void Edit_student(int num, Staff* p) {
 
 }
 
-
-
-void Course_1_Menu(Staff* p) {
-	string a = { "[ BACK ]" };
-	string b = { "[ EDIT ]" };
-	int y = 10;
-	int n = 2;
-	str thaotac[2] = { "[ BACK ]", "[ EDIT ]" };
+void Viewinfocourse(Staff* p, Semester* s, Course*& q, string file_csv) //  gồm delete , add student,  back
+{
 	str temp[8] = { "Course ID: ", "Course name: " ,  "Class name: " , "Teacher name: " , "Credit: " , "Size: " ,  "Day of week: " ,  "Season: " };
-	for (int i = 0; i < 8; i++) {
-		writeText(45, 9 + i, temp[i], 7);
-	}
+
+	gotoxy(45, 10);
+	cout << temp[0] << q->CourseID;
+
+	gotoxy(45, 11);
+	cout << temp[1] << q->CourseName;
+
+	gotoxy(45, 12);
+	cout << temp[2] << q->ClassName;
+
+	gotoxy(45, 13);
+	cout << temp[3] << q->TeacherName;
+
+	gotoxy(45, 14);
+	cout << temp[4] << q->Credit;
+
+	gotoxy(45, 15);
+	cout << temp[5] << q->Size;
+
+	gotoxy(45, 16);
+	cout << temp[6] << q->DayOfWeek;
+
+	gotoxy(45, 17);
+	cout << temp[7] << q->Session;
+
+	int y = 10;
+	int n = 3;
+
+	string thaotac[3] = { "*BACK*","*ADD STUDENT*","*DELETE*" };
+
 	int tt = 0;
+
+
+
 	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
 
-
-
 	int* mau = new int[n];
-	writeText(central(WConsole, "COURSE INFORMATION"), 7, "COURSE INFORMATION", MAUCHU);
+	writeText(central(WConsole, "COURSE - STUDENT"), 7, "COURSE - STUDENT", MAUCHU);
 	for (int i = 0; i < n; i++) {
 		mau[i] = MAUCHU;
 	}
@@ -2971,13 +2990,17 @@ void Course_1_Menu(Staff* p) {
 		textColor(MAUNEN);
 		int tmp = tt;
 		for (int i = 0; i < n; i++) {
-			if (thaotac[i] == a) {
-				writeText(45, 21, thaotac[i], mau[i]);
+			if (thaotac[i] == "*BACK*") {
+				writeText(43 , 21, thaotac[i], mau[i]);
 			}
-			if (thaotac[i] == b) {
-				writeText(65, 21, thaotac[i], mau[i]);
+			if (thaotac[i] == "*ADD STUDENT*") {
+				writeText(52, 21, thaotac[i], mau[i]);
+			}
+			if (thaotac[i] == "*DELETE*") {
+				writeText(69, 21, thaotac[i], mau[i]);
 			}
 		}
+
 
 		int z = _getch();
 		TRANGTHAI trangthai = key(z);
@@ -2986,7 +3009,7 @@ void Course_1_Menu(Staff* p) {
 		{
 			if (tt == 0)
 			{
-				y = 13;
+				y = 12;
 				tt = n - 1;
 			}
 			else {
@@ -3011,10 +3034,392 @@ void Course_1_Menu(Staff* p) {
 		case ENTER:
 			system("cls");
 			if (y == 10) {
-				StaffMenu(p);
+				// back to course list    void ViewCourseMenu_s(Staff*& p, SchoolYear*& q, Semester*& r)
+			}
+			if (y == 11) {
+				AddStudentMenu(p, s,q, file_csv);
+			}
+			if (y == 12) {
+				DelelteCourse(s,q);
+				// back to course list    void ViewCourseMenu_s(Staff*& p, SchoolYear*& q, Semester*& r)
+			}
+			break;
+		}
+		for (int i = 0; i < n; i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[tt] = MAUNEN;
+		textColor(MAUNEN);
+	}
+}
+
+void DelelteCourse(Semester*s,Course * q) {
+	Course* tmp = s->pHead;
+	for (tmp; tmp->pNext != q; tmp = tmp->pNext);
+	tmp->pNext = q->pNext;
+	delete q;
+}
+
+void AddStudentMenu(Staff* p,Semester*s, Course*& q, string file_csv) //  1 or csv
+{
+	int y = 10;
+	int n = 4;
+	int tt = 0;
+	string thaotac[4] = { "UP Load File CSV","Add One Student","View List Student", "[ BACK ]" };
+
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+	drawTable(45, 11, 30, 2, 3, 7);
+	gotoxy(47, 12);
+	cout << "UP Load File CSV";
+	gotoxy(47, 14);
+	cout << "Add One Student";
+	gotoxy(47, 16);
+	cout << "View List Student";
+	gotoxy(55, 20);
+	cout << "[ BACK ]";
+
+
+	int* mau = new int[n];
+	writeText(central(WConsole, "COURSE - STUDENT"), 7, "COURSE - STUDENT", MAUCHU);
+	for (int i = 0; i < n; i++) {
+		mau[i] = MAUCHU;
+	}
+	mau[0] = MAUNEN;
+	while (1) {
+		ShowCur(false);
+		deleteScreen();
+		textColor(MAUNEN);
+		int tmp = tt;
+		for (int i = 0; i < n; i++) {
+			if (thaotac[i] == "[ BACK ]") {
+				writeText(55, 20, thaotac[i], mau[i]);
+			}
+			if (thaotac[i] == "UP Load File CSV") {
+				writeText(47, 12, thaotac[i], mau[i]);
+			}
+			if (thaotac[i] == "Add One Student") {
+				writeText(47, 14, thaotac[i], mau[i]);
+			}
+			if (thaotac[i] == "View List Student") {
+				writeText(47, 16, thaotac[i], mau[i]);
+			}
+		}
+
+
+		int z = _getch();
+		TRANGTHAI trangthai = key(z);
+		switch (trangthai) {
+		case UP:
+		{
+			if (tt == 0)
+			{
+				y = 13;
+				tt = n - 1;
 			}
 			else {
-				StaffMenu(p);
+				tt--;
+				y--;
+			}
+			break;
+
+		}
+		case DOWN:
+		{
+			if (tt == n - 1) {
+				tt = 0;
+				y = 10;
+			}
+			else {
+				tt++;
+				y++;
+			}
+			break;
+		}
+		case ENTER:
+			system("cls");
+			if (y == 10) {
+				AddStudent_CSV(p, s,q, file_csv);
+			}
+			if (y == 11) {
+				AddOneStudent(p, s, q,file_csv);
+			}
+			if (y == 12) {
+				ViewStudentMenu(p, s, q,file_csv);
+			}
+			if (y == 13) {
+				Viewinfocourse(p, s, q, file_csv);
+			}
+			break;
+		}
+		for (int i = 0; i < n; i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[tt] = MAUNEN;
+		textColor(MAUNEN);
+	}
+}
+
+void AddOneStudent(Staff* p, Semester* s, Course* q,string file_csv) {
+	Student* sv = new Student;
+
+	string a = { "Password: " };
+	string b = { "ID: " };
+	string c = { "FirstName: " };
+	string d = { "LastName: " };
+	string e = { "Gender: " };
+	string f = { "DateOfBirth: " };
+	string g = { "SocialID: " };
+	string h = { "dTB: " };
+
+	str temp[8] = {"Password: ", "ID: ", "FirstName: " ,  "LastName: " , "Gender: " , "DateOfBirth: " , "SocialID: " ,  "dTB: " };
+	writeText(central(WConsole, "ADD ONE STUDENT" ), 7, "ADD ONE STUDENT", MAUCHU);
+	int y = 10;
+	int n = 2;
+	int tt = 0;
+	string j = { "[ CREATE ]" };
+	string k = { "[ BACK ]" };
+	str thaotac[2] = { "[ CREATE ]","[ BACK ]" };
+
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+	writeText(45, 21, thaotac[0], 7);
+
+	writeText(65, 21, thaotac[1], 7);
+	gotoxy(45, 10);
+	cout << a;
+	gotoxy(45, 11);
+	cout << b;
+	gotoxy(45, 12);
+	cout << c;
+	gotoxy(45, 13);
+	cout << d;
+	gotoxy(45, 14);
+	cout << e;
+	gotoxy(45, 15);
+	cout << f;
+	gotoxy(45, 16);
+	cout << g;
+	gotoxy(45, 17);
+	cout << h;
+
+	/*struct InforPerSon {
+	string Password;
+	string ID;
+	string FirstName;
+	string LastName;
+	int Gender;
+	string DateOfBirth;//dd/mm/yyyy
+	string SocialID;
+	string dTB;
+};
+*/
+
+	textColor(MAUNEN);
+	gotoxy(45, 10);
+	cout << temp[0];
+	cin >> sv->Info.Password;
+	textColor(7);
+	gotoxy(45, 10);
+	cout << temp[0] << sv->Info.Password;
+
+	textColor(MAUNEN);
+	gotoxy(45, 11);
+	cout << temp[1];
+	cin >> sv->Info.ID;
+	textColor(7);
+	gotoxy(45, 11);
+	cout << temp[1] << sv->Info.ID;
+
+	textColor(MAUNEN);
+	gotoxy(45, 12);
+	cout << temp[2];
+	cin >> sv->Info.FirstName;
+	textColor(7);
+	gotoxy(45, 12);
+	cout << temp[2] << sv->Info.FirstName;
+
+	textColor(MAUNEN);
+	gotoxy(45, 13);
+	cout << temp[3];
+	cin >> sv->Info.LastName;
+	textColor(7);
+	gotoxy(45, 13);
+	cout << temp[3] << sv->Info.LastName;
+
+	textColor(MAUNEN);
+	gotoxy(45, 14);
+	cout << temp[4];
+	cin >> sv->Info.Gender;
+	textColor(7);
+	gotoxy(45, 14);
+	cout << temp[4] << sv->Info.Gender;
+
+	textColor(MAUNEN);
+	gotoxy(45, 15);
+	cout << temp[5];
+	cin >> sv->Info.DateOfBirth;
+	textColor(7);
+	gotoxy(45, 15);
+	cout << temp[5] << sv->Info.DateOfBirth;
+
+	textColor(MAUNEN);
+	gotoxy(45, 16);
+	cout << temp[6];
+	cin >> sv->Info.SocialID;
+	textColor(7);
+	gotoxy(45, 16);
+	cout << temp[6] << sv->Info.SocialID;
+
+	textColor(MAUNEN);
+	gotoxy(45, 17);
+	cout << temp[7];
+	cin >> sv->Info.dTB;
+	textColor(7);
+	gotoxy(45, 17);
+	cout << temp[7] << sv->Info.dTB;
+
+
+
+	int* mau = new int[n];
+	for (int i = 0; i < n; i++) {
+		mau[i] = MAUCHU;
+	}
+	mau[0] = MAUNEN;
+
+	while (1) {
+		ShowCur(false);
+		deleteScreen();
+		textColor(MAUNEN);
+		int tmp = tt;
+		for (int i = 0; i < n; i++) {
+			if (thaotac[i] == j) {
+				writeText(45, 21, thaotac[i], mau[i]);
+			}
+			if (thaotac[i] == k) {
+				writeText(65, 21, thaotac[i], mau[i]);
+			}
+		}
+
+		int z = _getch();
+		TRANGTHAI trangthai = key(z);
+		switch (trangthai) {
+		case LEFT:
+		{
+			if (tt == 0)
+			{
+				y = 11;
+				tt = n - 1;
+			}
+			else {
+				tt--;
+				y--;
+			}
+			break;
+
+		}
+		case RIGHT:
+		{
+			if (tt == n - 1) {
+				tt = 0;
+				y = 10;
+			}
+			else {
+				tt++;
+				y++;
+			}
+			break;
+		}
+		case ENTER:
+			system("cls");
+			if (y == 10) {
+				SuccessMenu();
+				AddStudentMenu(p, s, q, file_csv);
+			}
+			else {
+				AddStudentMenu(p, s, q, file_csv);
+			}
+		}
+		for (int i = 0; i < n; i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[tt] = MAUNEN;
+		textColor(MAUNEN);
+	}
+
+}
+
+void AddStudent_CSV(Staff* p, Semester* s, Course* q,string file_csv) {
+	Student* sv = new Student;
+
+	writeText(central(WConsole, "ADD STUDENT CSV"), 7, "ADD STUDENT CSV", MAUCHU);
+	int y = 10;
+	int n = 2;
+	int tt = 0;
+	string j = { "[ CREATE ]" };
+	string k = { "[ BACK ]" };
+	str thaotac[2] = { "[ CREATE ]","[ BACK ]" };
+
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+	writeText(45, 21, thaotac[0], 7);
+
+	writeText(65, 21, thaotac[1], 7);
+
+	int* mau = new int[n];
+	for (int i = 0; i < n; i++) {
+		mau[i] = MAUCHU;
+	}
+	mau[0] = MAUNEN;
+
+	while (1) {
+		ShowCur(false);
+		deleteScreen();
+		textColor(MAUNEN);
+		int tmp = tt;
+		for (int i = 0; i < n; i++) {
+			if (thaotac[i] == j) {
+				writeText(45, 21, thaotac[i], mau[i]);
+			}
+			if (thaotac[i] == k) {
+				writeText(65, 21, thaotac[i], mau[i]);
+			}
+		}
+
+		int z = _getch();
+		TRANGTHAI trangthai = key(z);
+		switch (trangthai) {
+		case LEFT:
+		{
+			if (tt == 0)
+			{
+				y = 11;
+				tt = n - 1;
+			}
+			else {
+				tt--;
+				y--;
+			}
+			break;
+
+		}
+		case RIGHT:
+		{
+			if (tt == n - 1) {
+				tt = 0;
+				y = 10;
+			}
+			else {
+				tt++;
+				y++;
+			}
+			break;
+		}
+		case ENTER:
+			system("cls");
+			if (y == 10) {
+				SuccessMenu();
+				AddStudentMenu(p, s, q, file_csv);
+			}
+			else {
+				AddStudentMenu(p, s, q, file_csv);
 			}
 		}
 		for (int i = 0; i < n; i++) {
@@ -3025,3 +3430,87 @@ void Course_1_Menu(Staff* p) {
 	}
 }
 
+void ViewStudentMenu(Staff* p, Semester* s, Course* q,string file_csv)  // rỗng thì xuất ra đường dẫn tới add menu
+{
+	Student* sv = new Student;
+
+	writeText(central(WConsole, "VIEW STUDENT LIST"), 7, "VIEW STUDENT LIST", MAUCHU);
+	int y = 10;
+	int n = 2;
+	int tt = 0;
+	string j = { "[ CREATE ]" };
+	string k = { "[ BACK ]" };
+	str thaotac[2] = { "[ CREATE ]","[ BACK ]" };
+
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+	writeText(45, 21, thaotac[0], 7);
+
+	writeText(65, 21, thaotac[1], 7);
+
+	int* mau = new int[n];
+	for (int i = 0; i < n; i++) {
+		mau[i] = MAUCHU;
+	}
+	mau[0] = MAUNEN;
+
+	while (1) {
+		ShowCur(false);
+		deleteScreen();
+		textColor(MAUNEN);
+		int tmp = tt;
+		for (int i = 0; i < n; i++) {
+			if (thaotac[i] == j) {
+				writeText(45, 21, thaotac[i], mau[i]);
+			}
+			if (thaotac[i] == k) {
+				writeText(65, 21, thaotac[i], mau[i]);
+			}
+		}
+
+		int z = _getch();
+		TRANGTHAI trangthai = key(z);
+		switch (trangthai) {
+		case LEFT:
+		{
+			if (tt == 0)
+			{
+				y = 11;
+				tt = n - 1;
+			}
+			else {
+				tt--;
+				y--;
+			}
+			break;
+
+		}
+		case RIGHT:
+		{
+			if (tt == n - 1) {
+				tt = 0;
+				y = 10;
+			}
+			else {
+				tt++;
+				y++;
+			}
+			break;
+		}
+		case ENTER:
+			system("cls");
+			if (y == 10) {
+				SuccessMenu();
+				AddStudentMenu(p, s, q, file_csv);
+			}
+			else {
+				AddStudentMenu(p, s, q, file_csv);
+			}
+		}
+		for (int i = 0; i < n; i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[tt] = MAUNEN;
+		textColor(MAUNEN);
+	}
+
+}

@@ -1,4 +1,4 @@
-#ifndef BasicMenu_h
+﻿#ifndef BasicMenu_h
 #define BasicMenu_h
 
 
@@ -31,15 +31,20 @@ void MainMenu(Staff* p);
 						void CourseMenu(string a,int n,  Staff* p);
 							void CreateCourseMenu(string semester,int n, Staff* p);
 							void ViewCourseMenu(string semester,int num, Staff* p);
-								void Course_1_Menu(Staff* p);
+								void Viewinfocourse(Staff* p,Semester * s,Course* & q,string file_csv); //  gồm delete , add student,  back    line 2915
+								void DelelteCourse(Semester* s, Course* q);														// line 3058
+									void AddStudentMenu(Staff* p,Semester*s, Course*& q, string filename);//  1 or csv			// line 3065
+										void AddOneStudent(Staff* p, Semester* s, Course* q,string file_csv);					// line 3159
+										void AddStudent_CSV(Staff* p, Semester* s, Course* q, string file_csv);					// line 3174 
+											void ViewStudentMenu(Staff* p, Semester* s, Course* q, string file_csv);
 						void CourseMenu(string a,int n, Staff* p);
 							void CreateCourseMenu(string semester,int n, Staff* p);
 							void ViewCourseMenu(string semester, int num, Staff* p);
-								void Course_1_Menu(Staff* p);
+								
 						void CourseMenu(string a,int n, Staff* p);
 							void CreateCourseMenu(string semester, int n,Staff* p);
 							void ViewCourseMenu(string semester,int num, Staff* p);
-								void Course_1_Menu(Staff* p);
+								
 			void Info_Menu(Staff* p);
 				void EditinfoMenu(Staff* p);
 			void ChangePasswordMenu(Staff* p);
@@ -50,7 +55,7 @@ void MainMenu(Staff* p);
 	
 
 
-
+	
 
 	void push_enter_main_menu(int y, Staff* p);
 
@@ -114,8 +119,8 @@ void AddCourseMenu(Staff* p);
 
 void CourseMenuInside(string q, int num, Staff* p); // 2606
 
-
 void DeleteCourseMenu(Staff* p);
+
 void AddCourseMenu(Staff* p);
 
 

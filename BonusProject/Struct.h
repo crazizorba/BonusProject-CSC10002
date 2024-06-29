@@ -19,6 +19,7 @@ struct InforPerSon {
 	int Gender;
 	string DateOfBirth;//dd/mm/yyyy
 	string SocialID;
+	string dTB;
 };
 
 struct Student{
@@ -178,4 +179,20 @@ Student* LoginStudent(School c, string a, string b);
 int CountNodeSchoolYear(Staff* p);
 
 SchoolYear* getSchoolYearByNum(Staff* p,int a);
+
+int CountNodeSemester(SchoolYear* p);
+
+Semester* getSemeterByNum(SchoolYear* p, int a);
+
+int CountNodeCourse(Semester* p);
+
+Course* getCourseByNum(Semester* p, int a);
+
+int CountNodeStudent(Course* p);
+
+Student* getStudentByNum(Course* p, int a);
+
+int CountNodeStudent(Class* p);
+
+Student* getStudentByNum(Class* p, int a);
 #endif

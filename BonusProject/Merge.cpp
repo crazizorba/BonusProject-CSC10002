@@ -117,7 +117,7 @@ void MainMenu_s() {
 	cout << char(41) << char(41);
 }
 
-void LoginMenu_s(School S) {
+void LoginMenu_s(School &S) {
 	string c = { "[Staff]" };
 	string d = { "[Student]" };
 	int n = 2;
@@ -241,7 +241,7 @@ void LoginMenu_s(School S) {
 	}
 }
 
-void StaffMenu_s(Staff*p) {
+void StaffMenu_s(Staff*&p) {
 	int n = 6;
 	str thaotac[6] = { "Add school year","List school year", "Add class","List class","Personal Information","[LOG OUT]" };
 	int tt = 0;
@@ -379,7 +379,7 @@ void HelpMenu_s() {
 	
 }
 
-void InfoMenu_s(Staff*p) {
+void InfoMenu_s(Staff*&p) {
 	string a = { "[BACK]" };
 	string b = { "[EDIT]" };
 	int n = 2;
@@ -399,12 +399,9 @@ void InfoMenu_s(Staff*p) {
 	cout << p->Info.DateOfBirth;
 	writeText(57, 15, temp[5], 7);
 	cout << p->Info.SocialID;
-
 	int tt = 0;
 	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
 	drawBox(42, 10, 10, 6, MAUCHU);
-
-
 	int* mau = new int[n];
 	writeText(central(WConsole, "PERSONAL INFORMATION"), 7, "PERSONAL INFORMATION", MAUCHU);
 	for (int i = 0; i < n; i++) {
@@ -454,6 +451,10 @@ void InfoMenu_s(Staff*p) {
 			if (tt == 0) {
 				system("cls");
 				StaffMenu_s(p);
+			}
+			if (tt == 1) {
+				clrscr();
+				EditInfoMenu_s(p);
 			}
 		}
 		for (int i = 0; i < n; i++) {
@@ -562,7 +563,7 @@ void AddSchoolYearMenu_s(Staff* &p) {
 	}
 }
 
-void StudentMenu_s(Student *p) {
+void StudentMenu_s(Student *&p) {
 	int n = 5;
 	str thaotac[5] = { "Infomation","Course", "Class","Score","[LOG OUT]" };
 	int tt = 0;
@@ -636,7 +637,7 @@ void StudentMenu_s(Student *p) {
 	}
 }
 
-void InfoMenu_s(Student* p) {
+void InfoMenu_s(Student* &p) {
 	string a = { "[BACK]" };
 	string b = { "[EDIT]" };
 	int n = 2;
@@ -721,7 +722,7 @@ void InfoMenu_s(Student* p) {
 	}
 }
 
-void ViewschoolyearList_s(Staff* p) {
+void ViewschoolyearList_s(Staff* &p) {
 	if (p->pSchoolHead == NULL) {
 		int n = 3;
 		int tt = 0;
@@ -872,12 +873,415 @@ void ViewschoolyearList_s(Staff* p) {
 		}
 		case ENTER:
 			system("cls");
-			if (tt = n - 1) {
+			if (tt == n - 1) {
 				StaffMenu_s(p);
 			}
 			else {
 				SchoolYear* q = getSchoolYearByNum(p, tt);
+				SchoolYearMenu_s(p, q);
 			}
+		}
+		for (int i = 0; i < n; i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[tt] = MAUNEN;
+		textColor(MAUNEN);
+	}
+}
+
+void EditInfoMenu_s(Staff* &p) {
+	string a = { "[BACK]" };
+	int n = 7;
+	string thaotac[7] = { "ID","FirstName", "LastName","Gender", "DateOfBirth","SocialID","[BACK]" };
+	int tt = 0;
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+	int* mau = new int[n];
+	writeText(central(WConsole, "PERSONAL INFORMATION"), 7, "PERSONAL INFORMATION", MAUCHU);
+	for (int i = 0; i < n; i++) {
+		mau[i] = MAUCHU;
+	}
+	mau[0] = MAUNEN;
+	while (1) {
+		ShowCur(false);
+		deleteScreen();
+		textColor(MAUNEN);
+		int tmp = tt;
+		if (tt != n - 1) {
+			gotoxy(LeftBox-2, 10 + tt);
+			cout << char(175);
+			gotoxy(RightBox + 2, 10 + tt);
+			cout << char(174);
+		}
+		for (int i = 0; i < n; i++) {
+			if (thaotac[i] == a) {
+				writeText(56, 21, thaotac[i], mau[i]);
+			}
+			else {
+				writeText(central(WConsole, "DateOfBirth"), 10 + i, thaotac[i], mau[i]);
+			}
+		}
+
+		int z = _getch();
+		TRANGTHAI trangthai = key(z);
+		switch (trangthai) {
+		case UP:
+		{
+			if (tt == 0)
+			{
+				tt = n - 1;
+			}
+			else {
+				tt--;
+			}
+			break;
+
+		}
+		case DOWN:
+		{
+			if (tt == n - 1) {
+				tt = 0;
+			}
+			else {
+				tt++;
+			}
+			break;
+		}
+		case ENTER:
+			if (tt == 6) {
+				clrscr();
+				InfoMenu_s(p);
+			}
+			else if (tt == 0) {
+				clrscr();
+				Edit_ID_Menu_s(p);
+			}
+			else if (tt == 1) {
+				clrscr();
+				Edit_Firstname_Menu_s(p);
+			}
+			else if (tt == 2) {
+				clrscr();
+				Edit_Lastname_Menu_s(p);
+			}
+			else if (tt == 3) {
+				clrscr();
+				Edit_Gender_Menu_s(p);
+			}
+			else if (tt == 4) {
+				clrscr();
+				Edit_DateOfBirth_Menu_s(p);
+			}
+			else if (tt == 5) {
+				clrscr();
+				Edit_SocialID_Menu_s(p);
+			}
+		}
+		for (int i = 0; i < n; i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[tt] = MAUNEN;
+		textColor(MAUNEN);
+		gotoxy(LeftBox-2, 10 + tmp);
+		cout << " ";
+		gotoxy(RightBox+2, 10 + tmp);
+		cout << " ";
+	}
+}
+
+void Edit_ID_Menu_s(Staff* &p) {
+	string a = { "[SAVE]" };
+	string b = { "ID: " };
+	int n = 1;
+	int tt = 0;
+	string thaotac[1] = { "[SAVE]" };
+	writeText(56, 21, a, 7);
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+
+	int* mau = new int[n];
+	writeText(central(WConsole, "ID - INFORMATION"), 7, "ID - INFORMATION", MAUCHU);
+	for (int i = 0; i < n; i++) {
+		mau[i] = MAUCHU;
+	}
+	mau[0] = MAUNEN;
+
+	textColor(MAUNEN);
+	gotoxy(45, 10);
+	cout << b;
+	cin >> p->Info.ID;
+	textColor(7);
+	gotoxy(45, 10);
+	cout << b << p->Info.ID;
+
+	while (1) {
+		ShowCur(false);
+		deleteScreen();
+		textColor(MAUNEN);
+		int tmp = tt;
+
+		writeText(56, 21, a, mau[0]);
+
+		int z = _getch();
+		TRANGTHAI trangthai = key(z);
+		switch (trangthai) {
+		case ENTER:
+			system("cls");
+			EditInfoMenu_s(p);
+		}
+		for (int i = 0; i < n; i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[tt] = MAUNEN;
+		textColor(MAUNEN);
+	}
+}
+
+void Edit_Firstname_Menu_s(Staff* &p) {
+	string a = { "[SAVE]" };
+	string b = { "Firstname: " };
+	int y = 10;
+	int n = 1;
+	int tt = 0;
+	string thaotac[1] = { "[SAVE]" };
+	writeText(56, 21, a, 7);
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+
+	int* mau = new int[n];
+	writeText(central(WConsole, "FIRSTNAME - INFORMATION"), 7, "FIRSTNAME - INFORMATION", MAUCHU);
+	for (int i = 0; i < n; i++) {
+		mau[i] = MAUCHU;
+	}
+	mau[0] = MAUNEN;
+
+	textColor(MAUNEN);
+	gotoxy(45, 10);
+	cout << b;
+	cin >> p->Info.FirstName;
+	textColor(7);
+	gotoxy(45, 10);
+	cout << b << p->Info.FirstName;
+
+	while (1) {
+		ShowCur(false);
+		deleteScreen();
+		textColor(MAUNEN);
+		int tmp = tt;
+		writeText(56, 21, a, mau[0]);
+		int z = _getch();
+		TRANGTHAI trangthai = key(z);
+		switch (trangthai) {
+		case ENTER:
+			system("cls");
+			EditInfoMenu_s(p);
+		}
+		for (int i = 0; i < n; i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[tt] = MAUNEN;
+		textColor(MAUNEN);
+	}
+}
+
+void Edit_Lastname_Menu_s(Staff*& p) {
+	string a = { "[SAVE]" };
+	string b = { "Lastname: " };
+	int y = 10;
+	int n = 1;
+	int tt = 0;
+	string thaotac[1] = { "[SAVE]" };
+	writeText(56, 21, a, 7);
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+
+	int* mau = new int[n];
+	writeText(central(WConsole, "LASTNAME - INFORMATION"), 7, "LASTNAME - INFORMATION", MAUCHU);
+	for (int i = 0; i < n; i++) {
+		mau[i] = MAUCHU;
+	}
+	mau[0] = MAUNEN;
+	textColor(MAUNEN);
+	gotoxy(45, 10);
+	cout << b;
+	cin >> p->Info.LastName;
+	textColor(7);
+	gotoxy(45, 10);
+	cout << b << p->Info.LastName;
+	while (1) {
+		ShowCur(false);
+		deleteScreen();
+		textColor(MAUNEN);
+		int tmp = tt;
+
+		writeText(56, 21, a, mau[0]);
+
+		int z = _getch();
+		TRANGTHAI trangthai = key(z);
+		switch (trangthai) {
+		case ENTER:
+			system("cls");
+			EditInfoMenu_s(p);
+		}
+		for (int i = 0; i < n; i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[tt] = MAUNEN;
+		textColor(MAUNEN);
+	}
+}
+
+void Edit_Gender_Menu_s(Staff* &p) {
+	string a = "Gender: ";
+	string c = "[FEMALE]";
+	string b = "[MALE]";
+	int n = 2;
+	int tt = 0;
+	string thaotac[2] = { "[MALE]","[FEMALE]"};
+	writeText(45, 10, a, 7);
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+
+	int* mau = new int[n];
+	writeText(central(WConsole, "GENDER - INFORMATION"), 7, "GENDER - INFORMATION", MAUCHU);
+	for (int i = 0; i < n; i++) {
+		mau[i] = MAUCHU;
+	}
+	mau[0] = MAUNEN;
+	while (1) {
+		ShowCur(false);
+		deleteScreen();
+		textColor(MAUNEN);
+		writeText(58, 10, b, mau[0]);
+		writeText(66, 10, c, mau[1]);
+		int z = _getch();
+		TRANGTHAI trangthai = key(z);
+		switch (trangthai) {
+		case RIGHT:
+		{
+			if (tt == n - 1) {
+				tt = 0;
+			}
+			else {
+				tt++;
+			}
+			break;
+		}
+		case LEFT:
+		{
+			if (tt == 0)
+			{
+				tt = n - 1;
+			}
+			else {
+				tt--;
+			}
+			break;
+		}
+		case ENTER:
+		{
+			if (tt == 0) {
+				p->Info.Gender = 1;
+				clrscr();
+				EditInfoMenu_s(p);
+			}
+			else if (tt == 1) {
+				p->Info.Gender = 0;
+				clrscr();
+				EditInfoMenu_s(p);
+			}
+		}
+		}
+		for (int i = 0; i < n; i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[tt] = MAUNEN;
+		textColor(MAUNEN);
+	}
+}
+
+void Edit_DateOfBirth_Menu_s(Staff* &p) {
+	string a = { "[SAVE]" };
+	string b = { "DateOfBirth: " };
+	int y = 10;
+	int n = 1;
+	int tt = 0;
+	string thaotac[1] = { "[SAVE]" };
+	writeText(56, 21, a, 7);
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+
+	int* mau = new int[n];
+	writeText(central(WConsole, "DATE OF BIRTH - INFORMATION"), 7, "DATE OF BIRTH - INFORMATION", MAUCHU);
+	for (int i = 0; i < n; i++) {
+		mau[i] = MAUCHU;
+	}
+	mau[0] = MAUNEN;
+
+	textColor(MAUNEN);
+	gotoxy(45, 10);
+	cout << b;
+	cin >> p->Info.DateOfBirth;
+	textColor(7);
+	gotoxy(45, 10);
+	cout << b << p->Info.DateOfBirth;
+
+	while (1) {
+		ShowCur(false);
+		deleteScreen();
+		textColor(MAUNEN);
+		int tmp = tt;
+
+		writeText(56, 21, a, mau[0]);
+
+		int z = _getch();
+		TRANGTHAI trangthai = key(z);
+		switch (trangthai) {
+		case ENTER:
+			system("cls");
+			EditInfoMenu_s(p);
+		}
+		for (int i = 0; i < n; i++) {
+			mau[i] = MAUCHU;
+		}
+		mau[tt] = MAUNEN;
+		textColor(MAUNEN);
+	}
+}
+
+void Edit_SocialID_Menu_s(Staff* &p) {
+	string a = { "[SAVE]" };
+	string b = { "SocialID: " };
+	int y = 10;
+	int n = 1;
+	int tt = 0;
+	string thaotac[1] = { "[SAVE]" };
+	writeText(56, 21, a, 7);
+	drawBox(Xbox, Ybox, Wbox, Hbox, MAUCHU);
+
+	int* mau = new int[n];
+	writeText(central(WConsole, "SOCIAL ID - INFORMATION"), 7, "SOCIAL ID - INFORMATION", MAUCHU);
+	for (int i = 0; i < n; i++) {
+		mau[i] = MAUCHU;
+	}
+	mau[0] = MAUNEN;
+
+	textColor(MAUNEN);
+	gotoxy(45, 10);
+	cout << b;
+	cin >> p->Info.SocialID;
+	textColor(7);
+	gotoxy(45, 10);
+	cout << b << p->Info.SocialID;
+
+	while (1) {
+		ShowCur(false);
+		deleteScreen();
+		textColor(MAUNEN);
+		int tmp = tt;
+
+		writeText(56, 21, a, mau[0]);
+
+		int z = _getch();
+		TRANGTHAI trangthai = key(z);
+		switch (trangthai) {
+		case ENTER:
+			system("cls");
+			EditInfoMenu_s(p);
 		}
 		for (int i = 0; i < n; i++) {
 			mau[i] = MAUCHU;

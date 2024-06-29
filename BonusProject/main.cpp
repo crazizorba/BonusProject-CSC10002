@@ -6,10 +6,23 @@
 
 int main() {
 	Staff* p = new Staff;
-	MainMenu(p);
+	Course* q = new Course;
+	string csv;
+	Semester* s = new Semester;
+	q->ClassName = { "23ctt5" };
+	q->CourseID = "1234";
+	q->CourseName = "nhap mon";
+	q->Credit = 3;
+	q->DayOfWeek = "monday";
+	q->Session = "1";
+	q->Size = 50;
+	q->TeacherName = "Le Van Hop";
+
+	//MainMenu(p);
+	//MainMenu_s();
+	Viewinfocourse(p,s,q,csv);
 	
-	
-	
+
 	
 	system("pause");
 	return 0;
