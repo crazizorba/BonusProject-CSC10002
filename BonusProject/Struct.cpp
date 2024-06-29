@@ -882,3 +882,95 @@ SchoolYear* getSchoolYearByNum(Staff* p,int a) {
 	}
 	return q;
 }
+
+int CountNodeSemester(SchoolYear* p) {
+	if (p->pHead == NULL) return 0;
+	else {
+		Semester* q = p->pHead;
+		int i = 0;
+		while (q != NULL) {
+			i++;
+			q = q->pNext;
+		}
+		return i;
+	}
+}
+
+Semester* getSemeterByNum(SchoolYear* p, int a) {
+	int i = 1;
+	Semester* q = p->pHead;
+	while (i != a) {
+		i++;
+		q = q->pNext;
+	}
+	return q;
+}
+
+int CountNodeCourse(Semester* p) {
+	if (p->pHead == NULL) return 0;
+	else {
+		Course* q = p->pHead;
+		int i = 0;
+		while (q != NULL) {
+			i++;
+			q = q->pNext;
+		}
+		return i;
+	}
+}
+
+Course* getCourseByNum(Semester* p, int a) {
+	int i = 1;
+	Course* q = p->pHead;
+	while (i != a) {
+		i++;
+		q = q->pNext;
+	}
+	return q;
+}
+
+int CountNodeStudent(Course* p) {
+	if (p->pHead == NULL) return 0;
+	else {
+		Student* q = p->pHead;
+		int i = 0;
+		while (q != NULL) {
+			i++;
+			q = q->pNextCourse;
+		}
+		return i;
+	}
+}
+
+Student* getStudentByNum(Course* p, int a) {
+	int i = 1;
+	Student* q = p->pHead;
+	while (i != a) {
+		i++;
+		q = q->pNextCourse;
+	}
+	return q;
+}
+
+int CountNodeStudent(Class* p) {
+	if (p->pHead == NULL) return 0;
+	else {
+		Student* q = p->pHead;
+		int i = 0;
+		while (q != NULL) {
+			i++;
+			q = q->pNextClass;
+		}
+		return i;
+	}
+}
+
+Student* getStudentByNum(Class* p, int a) {
+	int i = 1;
+	Student* q = p->pHead;
+	while (i != a) {
+		i++;
+		q = q->pNextClass;
+	}
+	return q;
+}

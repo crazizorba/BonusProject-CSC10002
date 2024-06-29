@@ -131,6 +131,7 @@
     <ClCompile Include="GraphicBasic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Merge.cpp" />
+    <ClCompile Include="Merge2.cpp" />
     <ClCompile Include="Struct.cpp" />
   </ItemGroup>
   <ItemGroup>
